@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>元気デイきらら | 社会福祉法人三愛会</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Zen Kaku Gothic New"', 'sans-serif'],
+                        serif: ['"Noto Serif JP"', 'serif'],
+                    },
+                    colors: {
+                        primary: {
+                            50: '#f0f9fa',
+                            100: '#dff1f5',
+                            200: '#b8e3ea',
+                            500: '#00afcc', // 指定色 (シアン)
+                            600: '#008ba3',
+                            800: '#005766',
+                            900: '#003a45', 
+                        },
+                        secondary: {
+                            50: '#f4fbf3',
+                            100: '#e4f6e1',
+                            200: '#c4ebbe',
+                            500: '#98d98e', // 指定色 (ミントグリーン)
+                            600: '#7ac26f',
+                            800: '#4b8543',
+                            900: '#33612c', 
+                        },
+                        slate: {
+                            800: '#1e293b',
+                            900: '#0f172a',
+                        }
+                    },
+                    boxShadow: {
+                        'soft-3d': '0 20px 40px -15px rgba(0, 58, 69, 0.1)',
+                        'soft-3d-hover': '0 30px 60px -15px rgba(0, 58, 69, 0.2)',
+                        'inner-light': 'inset 0 1px 0 rgba(255,255,255,0.8)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <style>
+        /* スクロールバー非表示 */
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* 動的背景グラデーション */
+        .bg-gradient-animate {
+            background: linear-gradient(-45deg, #f0f9fa, #e4f6e1, #ffffff, #f0f9fa);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        /* スクロールアニメーション (フェードアップ) */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 1s cubic-bezier(0.16, 1, 0.3, 1), transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .fade-up.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* 遅延バリエーション */
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+
+        /* 3Dグラスモーフィズムカード */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 10px 30px -10px rgba(0, 58, 69, 0.08);
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            transform-style: preserve-3d;
+        }
+        .glass-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px -15px rgba(0, 58, 69, 0.15);
+            background: rgba(255, 255, 255, 0.9);
+            border-color: rgba(255, 255, 255, 1);
+        }
+
+        /* 特殊な光沢ボタンエフェクト */
+        .btn-shine {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-shine::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 50%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-20deg);
+            transition: all 0.7s ease;
+        }
+        .btn-shine:hover::after {
+            left: 200%;
+        }
+    </style>
+</head>
+<body class="min-h-screen bg-primary-50 font-sans text-slate-800 scroll-smooth selection:bg-secondary-200 selection:text-slate-900">
+
+    <!-- Header (上部固定メニュー) -->
+    <header class="bg-white/80 backdrop-blur-md border-b border-primary-100 sticky top-0 z-50 transition-all duration-300">
+        <div class="max-w-5xl mx-auto px-4 py-3 flex flex-col md:flex-row justify-between items-center gap-3 md:gap-0">
+            <div class="flex justify-between w-full md:w-auto items-center">
+                <a href="#hero" class="block cursor-pointer smooth-scroll group">
+                    <p class="text-[10px] tracking-widest text-slate-500 font-medium mb-0.5">社会福祉法人三愛会</p>
+                    <h1 class="text-xl md:text-2xl font-serif font-bold text-primary-800 tracking-wider group-hover:text-primary-500 transition-colors">元気デイきらら</h1>
+                </a>
+                <a href="tel:097-578-7320" class="md:hidden flex items-center gap-1 bg-gradient-to-r from-primary-500 to-secondary-500 text-white px-4 py-2 rounded-full font-medium text-xs shadow-soft-3d shadow-inner-light">
+                    <i data-lucide="phone" class="w-3.5 h-3.5"></i> 発信
+                </a>
+            </div>
+            
+            <!-- ナビゲーションメニュー -->
+            <nav class="w-full md:w-auto overflow-x-auto hide-scrollbar">
+                <ul class="flex items-center gap-5 md:gap-8 text-base font-medium text-slate-600 whitespace-nowrap pb-1 md:pb-0">
+                    <li><a href="#strengths" class="smooth-scroll hover:text-primary-600 transition-colors py-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary-500 after:transition-all hover:after:w-full cursor-pointer">３つの特徴</a></li>
+                    <li><a href="#plans" class="smooth-scroll hover:text-primary-600 transition-colors py-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary-500 after:transition-all hover:after:w-full cursor-pointer">プラン</a></li>
+                    <li><a href="#schedule" class="smooth-scroll hover:text-primary-600 transition-colors py-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary-500 after:transition-all hover:after:w-full cursor-pointer">1日の流れ</a></li>
+                    <li><a href="#recreation" class="smooth-scroll hover:text-primary-600 transition-colors py-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary-500 after:transition-all hover:after:w-full cursor-pointer">外出レク</a></li>
+                    <li><a href="#pricing" class="smooth-scroll hover:text-primary-600 transition-colors py-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary-500 after:transition-all hover:after:w-full cursor-pointer">料金表</a></li>
+                    <li><a href="#faq" class="smooth-scroll hover:text-primary-600 transition-colors py-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary-500 after:transition-all hover:after:w-full cursor-pointer">Q&A</a></li>
+                    <li><a href="#voice" class="smooth-scroll hover:text-primary-600 transition-colors py-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary-500 after:transition-all hover:after:w-full cursor-pointer">お客様の声</a></li>
+                    <li><a href="#info" class="smooth-scroll hover:text-primary-600 transition-colors py-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary-500 after:transition-all hover:after:w-full cursor-pointer">施設情報</a></li>
+                </ul>
+            </nav>
+
+            <a href="tel:097-578-7320" class="hidden md:flex items-center gap-2 bg-gradient-to-r from-primary-500 to-secondary-500 text-white px-6 py-2.5 rounded-full font-medium transition-all shadow-soft-3d shadow-inner-light hover:shadow-soft-3d-hover hover:-translate-y-0.5 btn-shine">
+                <i data-lucide="phone" class="w-4 h-4"></i>
+                097-578-7320
+            </a>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="relative bg-gradient-animate overflow-hidden">
+        <!-- 背景の装飾的な3D要素 (ぼかし円) -->
+        <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[50%] rounded-full bg-primary-200/40 blur-3xl"></div>
+        <div class="absolute bottom-[-10%] right-[-5%] w-[30%] h-[40%] rounded-full bg-secondary-200/40 blur-3xl"></div>
+
+        <div class="max-w-4xl mx-auto px-4 py-24 md:py-36 text-center space-y-10 relative z-10 fade-up">
+            <h2 class="text-3xl md:text-5xl lg:text-6xl font-serif font-bold text-slate-900 leading-[1.5] md:leading-[1.4] tracking-wider">
+                趣味と会話で彩る、<br />
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-secondary-600 text-4xl md:text-6xl lg:text-7xl block mt-6 relative inline-block">
+                    大人たちの社交場。
+                    <span class="absolute -bottom-2 left-0 w-full h-1 bg-secondary-200 rounded-full opacity-60"></span>
+                </span>
+            </h2>
+            <p class="text-xl md:text-2xl text-slate-600 font-medium tracking-widest leading-relaxed">
+                男性も女性も自分らしく。<br class="md:hidden" />笑顔になれるアットホームな空間。
+            </p>
+            <div class="pt-8 flex justify-center fade-up delay-200">
+                <a href="#contact" class="smooth-scroll inline-flex items-center justify-center px-12 py-5 text-lg font-medium text-white bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full shadow-soft-3d shadow-inner-light transition-all hover:shadow-soft-3d-hover hover:-translate-y-0.5 gap-3 cursor-pointer btn-shine">
+                    見学・ご相談はこちら <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3つの特徴 -->
+    <section id="strengths" class="py-24 bg-white relative">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center mb-16 fade-up">
+                <p class="text-primary-600 font-bold tracking-widest text-sm mb-3">FEATURES</p>
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-slate-900">
+                    元気デイきらら、３つの特徴
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="glass-card bg-primary-50/30 p-8 rounded-3xl relative fade-up border-primary-100/50">
+                    <div class="w-16 h-16 bg-gradient-to-br from-primary-100 to-white rounded-2xl shadow-sm flex items-center justify-center text-primary-600 mb-6 border border-white">
+                        <i data-lucide="activity" class="w-7 h-7"></i>
+                    </div>
+                    <div class="absolute top-8 right-8 text-6xl font-serif font-bold text-slate-900/5 select-none">1</div>
+                    <h3 class="text-xl md:text-2xl font-bold mb-4 tracking-wide text-slate-900">
+                        PT・OT常駐による<br/>本格リハビリ体制
+                    </h3>
+                    <p class="text-slate-600 leading-relaxed text-base font-medium">
+                        理学療法士と作業療法士の2名体制で常駐。お一人おひとりの身体機能に合わせた個別リハビリを提供します。
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="glass-card bg-gradient-to-br from-primary-50/20 to-secondary-50/20 p-8 rounded-3xl relative fade-up delay-100 border-primary-100/30">
+                    <div class="w-16 h-16 bg-gradient-to-br from-primary-50 to-secondary-50 rounded-2xl shadow-sm flex items-center justify-center text-primary-500 mb-6 border border-white">
+                        <i data-lucide="users" class="w-7 h-7"></i>
+                    </div>
+                    <div class="absolute top-8 right-8 text-6xl font-serif font-bold text-slate-900/5 select-none">2</div>
+                    <h3 class="text-xl md:text-2xl font-bold mb-4 tracking-wide text-slate-900">
+                        登録の４割が男性！<br/>「ハマる」デイサービス
+                    </h3>
+                    <p class="text-slate-600 leading-relaxed text-base font-medium">
+                        全国平均（約2割）を大きく上回る、登録者の約4割が男性のご利用者様です。囲碁・将棋・麻雀といった個別活動や、目標を持てる本格リハビリなど、男性が心から楽しめる居場所をご提供します。
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="glass-card bg-secondary-50/30 p-8 rounded-3xl relative fade-up delay-200 border-secondary-100/50">
+                    <div class="w-16 h-16 bg-gradient-to-br from-secondary-100 to-white rounded-2xl shadow-sm flex items-center justify-center text-secondary-600 mb-6 border border-white">
+                        <i data-lucide="clock" class="w-7 h-7"></i>
+                    </div>
+                    <div class="absolute top-8 right-8 text-6xl font-serif font-bold text-slate-900/5 select-none">3</div>
+                    <h3 class="text-xl md:text-2xl font-bold mb-4 tracking-wide text-slate-900">
+                        体力に合わせて選べる<br/>1日と半日プラン
+                    </h3>
+                    <p class="text-slate-600 leading-relaxed text-base font-medium">
+                        ご自身のペースでゆったり過ごせる基本の1日利用に加え、必要なケアを凝縮した半日利用をオプションとしてご用意しています。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ご利用プラン -->
+    <section id="plans" class="py-24 bg-primary-50 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-secondary-100 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 opacity-50"></div>
+        <div class="max-w-5xl mx-auto px-4 relative z-10">
+            <div class="text-center mb-16 fade-up">
+                <p class="text-primary-600 font-bold tracking-widest text-sm mb-3">PLANS</p>
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-slate-900">
+                    選べる２つのご利用プラン
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- 基本プラン -->
+                <div class="bg-white rounded-[2rem] p-8 shadow-soft-3d border border-primary-100/50 relative overflow-hidden group hover:shadow-soft-3d-hover transition-all duration-500 fade-up">
+                    <div class="absolute top-0 left-0 w-full h-1.5 bg-primary-500 transform origin-left scale-x-100 transition-transform duration-500"></div>
+                    
+                    <div class="flex justify-between items-start mb-6">
+                        <div>
+                            <span class="text-sm font-bold tracking-widest text-primary-600 bg-primary-50 px-3 py-1 rounded-full mb-3 inline-block">STANDARD</span>
+                            <h3 class="text-2xl md:text-3xl font-serif font-bold text-slate-900">ゆったり1日利用</h3>
+                        </div>
+                        <div class="text-right">
+                            <span class="block text-xl md:text-2xl font-bold text-primary-800">9:15<span class="text-base font-normal mx-1">〜</span>16:30</span>
+                        </div>
+                    </div>
+                    
+                    <p class="text-slate-600 text-lg leading-relaxed font-medium">
+                        リハビリ、入浴、お食事、他者との交流を通じた心身の活性化を、1日かけてご自身のペースでゆったりと行います。
+                    </p>
+                </div>
+
+                <!-- オプションプラン -->
+                <div class="bg-gradient-to-br from-secondary-50 to-white rounded-[2rem] p-8 shadow-soft-3d border border-secondary-200/50 relative overflow-hidden group hover:shadow-soft-3d-hover transition-all duration-500 fade-up delay-100">
+                    <div class="absolute top-0 left-0 w-full h-1.5 bg-secondary-500 transform origin-left scale-x-100 transition-transform duration-500"></div>
+                    
+                    <div class="flex justify-between items-start mb-6">
+                        <div>
+                            <span class="text-sm font-bold tracking-widest text-secondary-700 bg-secondary-100 px-3 py-1 rounded-full mb-3 inline-block">OPTION</span>
+                            <h3 class="text-2xl md:text-3xl font-serif font-bold text-slate-900">充実の半日利用</h3>
+                        </div>
+                        <div class="text-right">
+                            <span class="block text-xl md:text-2xl font-bold text-secondary-800">9:15<span class="text-base font-normal mx-1">〜</span>13:30</span>
+                        </div>
+                    </div>
+                    
+                    <p class="text-slate-600 text-lg leading-relaxed font-medium mb-4">
+                        お昼すぎまでの短い時間の中で、三大ケアが完結します。長時間の利用に体力的な不安がある方に最適です。
+                    </p>
+                    <div class="flex gap-2 flex-wrap">
+                        <span class="text-sm font-bold text-secondary-600 bg-white border border-secondary-200 px-3 py-1.5 rounded-lg shadow-sm">入浴</span>
+                        <span class="text-sm font-bold text-secondary-600 bg-white border border-secondary-200 px-3 py-1.5 rounded-lg shadow-sm">専門リハビリ</span>
+                        <span class="text-sm font-bold text-secondary-600 bg-white border border-secondary-200 px-3 py-1.5 rounded-lg shadow-sm">昼食</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 1日の流れ -->
+    <section id="schedule" class="py-24 bg-white relative">
+        <div class="max-w-3xl mx-auto px-4">
+            <div class="text-center mb-16 fade-up">
+                <p class="text-primary-600 font-bold tracking-widest text-sm mb-3">SCHEDULE</p>
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-slate-900">
+                    1日の流れ
+                </h2>
+                <p class="mt-4 text-slate-500 font-medium text-sm">※基本プランの場合</p>
+            </div>
+            
+            <div class="relative border-l border-primary-100 ml-4 md:ml-12 py-4 space-y-10">
+                
+                <!-- タイムラインアイテム用のテンプレート構造 -->
+                <script>
+                    const scheduleData = [
+                        { time: '9:15', title: '到着', desc: '' },
+                        { time: '9:30', title: 'バイタルチェック', desc: '血圧や体温などを測定し、当日の体調を確認します。' },
+                        { time: '10:00', title: '入浴・歩行訓練', desc: '安全な環境での入浴や、身体機能に合わせた歩行訓練を行います。' },
+                        { time: '10:30', title: '集団体操', desc: 'ストレッチやボールゴム体操で、無理なく身体をほぐします。' },
+                        { time: '11:45', title: '平行棒訓練', desc: '下肢筋力の維持・向上を目指します。' },
+                        { time: '12:00', title: '口腔体操', desc: 'お食事の前に、安全に飲み込むための体操を行います。' },
+                        { time: '12:20', title: '昼食', desc: '温かく栄養バランスの取れたお食事をご提供します。' },
+                        { time: '13:00', title: '個別活動', desc: 'お一人おひとりのペースで過ごしていただきます。' },
+                        { type: 'info', text: '半日利用プランは13:30で終了・お送りとなります' },
+                        { time: '14:00', title: 'きらら体操', desc: '施設オリジナルの体操で身体を動かします。' },
+                        { time: '14:30', title: '個別活動', desc: '脳トレ、生活訓練、手芸、囲碁、将棋、麻雀などをご提供します。' },
+                        { time: '15:30', title: 'おやつ', desc: 'ホッと一息つけるおやつの時間です。' },
+                        { time: '16:30', title: 'お送り', desc: 'ご自宅まで安全にお送りいたします。' }
+                    ];
+
+                    document.write(scheduleData.map((item, index) => {
+                        if(item.type === 'info') {
+                            return `
+                            <div class="ml-8 relative flex items-center fade-up" style="transition-delay: ${index%3 * 100}ms">
+                                <div class="absolute -left-[2.05rem] w-8 border-t border-dashed border-secondary-300"></div>
+                                <div class="bg-secondary-50 text-secondary-900 text-base font-bold px-5 py-3 rounded-xl border border-secondary-200 flex items-center gap-3 w-full backdrop-blur-sm">
+                                    <i data-lucide="info" class="w-5 h-5 text-secondary-600"></i> ${item.text}
+                                </div>
+                            </div>
+                            `;
+                        }
+                        return `
+                        <div class="ml-8 relative group fade-up" style="transition-delay: ${index%3 * 100}ms">
+                            <span class="absolute -left-[2.4rem] w-4 h-4 bg-white rounded-full border-[3px] border-primary-300 shadow-sm transition-all duration-300 group-hover:bg-primary-500 group-hover:scale-125 group-hover:border-white z-10 mt-1.5"></span>
+                            <div class="flex flex-col md:flex-row md:items-start gap-3 md:gap-6">
+                                <span class="font-bold text-xl md:text-2xl text-primary-800 w-24 pt-0.5 tracking-wider font-serif">${item.time}</span>
+                                <div class="bg-primary-50/30 p-5 rounded-2xl flex-1 shadow-sm border border-primary-100/50 group-hover:shadow-soft-3d transition-all duration-300 transform group-hover:-translate-y-1">
+                                    <h4 class="font-bold text-slate-900 text-xl">${item.title}</h4>
+                                    ${item.desc ? `<p class="text-slate-600 mt-2 text-base leading-relaxed font-medium">${item.desc}</p>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                        `;
+                    }).join(''));
+                </script>
+            </div>
+        </div>
+    </section>
+
+    <!-- 外出レクリエーション -->
+    <section id="recreation" class="py-24 bg-white relative">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center mb-16 fade-up">
+                <p class="text-primary-600 font-bold tracking-widest text-sm mb-3">RECREATION</p>
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-slate-900">
+                    充実の外出レクリエーション
+                </h2>
+            </div>
+            
+            <div class="bg-gradient-to-br from-primary-50 to-secondary-50 rounded-[2rem] p-8 md:p-12 shadow-soft-3d border border-primary-100/50 flex flex-col md:flex-row items-center gap-10 fade-up">
+                <div class="md:w-1/2 space-y-6">
+                    <div class="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full text-primary-600 font-bold text-sm shadow-sm border border-primary-100">
+                        <i data-lucide="bus" class="w-4 h-4"></i> 2ヶ月に1回の特別イベント
+                    </div>
+                    <h3 class="text-2xl md:text-3xl font-serif font-bold text-slate-900 leading-relaxed">
+                        季節を感じるお出かけで、<br/>心身ともにリフレッシュ
+                    </h3>
+                    <p class="text-slate-600 text-lg leading-relaxed font-medium">
+                        きららでは、2ヶ月に1回、外出レクリエーションを活発に行っています。季節の移ろいを感じるドライブや、お買い物、外食など、非日常の体験を通して、気分転換や社会参加の機会を提供しています。
+                    </p>
+                </div>
+                
+                <div class="md:w-1/2 w-full">
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-primary-100/50">
+                        <h4 class="font-bold text-slate-800 mb-4 flex items-center gap-2 border-b border-primary-50 pb-3">
+                            <i data-lucide="map" class="w-5 h-5 text-secondary-500"></i> これまでのお出かけ先
+                        </h4>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-white text-primary-800 px-3 py-1.5 rounded-lg text-sm font-bold border border-primary-200 shadow-sm hover:bg-primary-50 transition-colors">護国神社</span>
+                            <span class="bg-white text-primary-800 px-3 py-1.5 rounded-lg text-sm font-bold border border-primary-200 shadow-sm hover:bg-primary-50 transition-colors">佐賀関ツアー（道の駅・海星館など）</span>
+                            <span class="bg-white text-primary-800 px-3 py-1.5 rounded-lg text-sm font-bold border border-primary-200 shadow-sm hover:bg-primary-50 transition-colors">春日神社</span>
+                            <span class="bg-white text-primary-800 px-3 py-1.5 rounded-lg text-sm font-bold border border-primary-200 shadow-sm hover:bg-primary-50 transition-colors">新ホーバー乗り場</span>
+                            <span class="bg-white text-primary-800 px-3 py-1.5 rounded-lg text-sm font-bold border border-primary-200 shadow-sm hover:bg-primary-50 transition-colors">外食レク</span>
+                            <span class="bg-white text-primary-800 px-3 py-1.5 rounded-lg text-sm font-bold border border-primary-200 shadow-sm hover:bg-primary-50 transition-colors">桜見ドライブ</span>
+                            <span class="bg-white text-primary-800 px-3 py-1.5 rounded-lg text-sm font-bold border border-primary-200 shadow-sm hover:bg-primary-50 transition-colors">マルショク買い物</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 料金表 -->
+    <section id="pricing" class="py-24 bg-primary-50 relative">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="text-center mb-16 fade-up">
+                <p class="text-primary-600 font-bold tracking-widest text-sm mb-3">PRICING</p>
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-slate-900">
+                    ご利用料金の目安
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-12">
+                <!-- 要支援 -->
+                <div class="glass-card rounded-[2rem] overflow-hidden flex flex-col fade-up bg-white">
+                    <div class="bg-primary-100/50 text-primary-900 text-center py-5 border-b border-primary-100">
+                        <h3 class="font-serif font-bold text-2xl">要支援の方</h3>
+                        <p class="text-sm text-primary-800/80 mt-1 font-medium">※月額の自己負担額（1割負担の場合）</p>
+                    </div>
+                    <div class="p-6 md:p-8 flex-1">
+                        <table class="w-full text-left border-collapse">
+                            <tbody>
+                                <tr class="border-b border-primary-100/50 group transition-colors hover:bg-primary-50/50">
+                                    <td class="py-5 px-2">
+                                        <div class="font-bold text-slate-900 text-lg">要支援 1</div>
+                                        <div class="text-sm text-slate-500 mt-1">週1回程度</div>
+                                    </td>
+                                    <td class="py-5 px-2 text-right whitespace-nowrap">
+                                        <span class="text-3xl font-bold text-primary-800">1,672</span>
+                                        <span class="text-base text-primary-800/60 ml-1">円/月</span>
+                                    </td>
+                                </tr>
+                                <tr class="group transition-colors hover:bg-primary-50/50">
+                                    <td class="py-5 px-2">
+                                        <div class="font-bold text-slate-900 text-lg">要支援 2</div>
+                                        <div class="text-sm text-slate-500 mt-1">週2回程度</div>
+                                    </td>
+                                    <td class="py-5 px-2 text-right whitespace-nowrap">
+                                        <span class="text-3xl font-bold text-primary-800">3,428</span>
+                                        <span class="text-base text-primary-800/60 ml-1">円/月</span>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 要介護 -->
+                <div class="glass-card rounded-[2rem] overflow-hidden flex flex-col fade-up delay-100 bg-white">
+                    <div class="bg-secondary-100/50 text-secondary-900 text-center py-5 border-b border-secondary-100">
+                        <h3 class="font-serif font-bold text-2xl">要介護の方</h3>
+                        <p class="text-sm text-secondary-800/80 mt-1 font-medium">※1回あたりの自己負担額（1割負担の場合）</p>
+                    </div>
+                    <div class="p-6 md:p-8 flex-1">
+                        <table class="w-full text-left border-collapse">
+                            <tbody>
+                                <tr class="border-b border-secondary-100/50 transition-colors hover:bg-secondary-50/50">
+                                    <td class="py-4 px-2 font-bold text-slate-900 text-lg">要介護 1</td>
+                                    <td class="py-4 px-2 text-right whitespace-nowrap"><span class="text-3xl font-bold text-secondary-800">658</span><span class="text-base text-secondary-800/60 ml-1">円</span></td>
+                                </tr>
+                                <tr class="border-b border-secondary-100/50 transition-colors hover:bg-secondary-50/50">
+                                    <td class="py-4 px-2 font-bold text-slate-900 text-lg">要介護 2</td>
+                                    <td class="py-4 px-2 text-right whitespace-nowrap"><span class="text-3xl font-bold text-secondary-800">777</span><span class="text-base text-secondary-800/60 ml-1">円</span></td>
+                                </tr>
+                                <tr class="border-b border-secondary-100/50 transition-colors hover:bg-secondary-50/50">
+                                    <td class="py-4 px-2 font-bold text-slate-900 text-lg">要介護 3</td>
+                                    <td class="py-4 px-2 text-right whitespace-nowrap"><span class="text-3xl font-bold text-secondary-800">900</span><span class="text-base text-secondary-800/60 ml-1">円</span></td>
+                                </tr>
+                                <tr class="border-b border-secondary-100/50 transition-colors hover:bg-secondary-50/50">
+                                    <td class="py-4 px-2 font-bold text-slate-900 text-lg">要介護 4</td>
+                                    <td class="py-4 px-2 text-right whitespace-nowrap"><span class="text-3xl font-bold text-secondary-800">1,023</span><span class="text-base text-secondary-800/60 ml-1">円</span></td>
+                                </tr>
+                                <tr class="transition-colors hover:bg-secondary-50/50">
+                                    <td class="py-4 px-2 font-bold text-slate-900 text-lg">要介護 5</td>
+                                    <td class="py-4 px-2 text-right whitespace-nowrap"><span class="text-3xl font-bold text-secondary-800">1,148</span><span class="text-base text-secondary-800/60 ml-1">円</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ご留意事項 (シミュレーションの上に入れ替え) -->
+            <div class="bg-transparent border border-primary-200/60 p-6 md:p-8 rounded-2xl text-base text-slate-600 space-y-4 fade-up mb-10">
+                <p class="font-bold text-slate-900 text-lg flex items-center gap-2"><i data-lucide="info" class="w-5 h-5 text-primary-500"></i> ご留意事項</p>
+                <ul class="list-disc pl-6 space-y-3 marker:text-primary-400">
+                    <li>要支援の料金は、1割負担の場合の月額定額料金です（お持ちの介護保険負担割合証により、2割・3割となる場合があります）。</li>
+                    <li>要介護の料金は、1割負担の場合の１回分の料金です（お持ちの介護保険負担割合証により、2割・3割となる場合があります）。</li>
+                    <li>入浴介助加算や個別機能訓練加算などの各種加算を取得しているため、最終的なご請求金額は上記目安とは異なります。詳細はお問い合わせください。</li>
+                    <li class="font-bold text-slate-800 bg-primary-100/50 inline-block px-4 py-2 rounded-md mt-2">実費負担額： 昼食代 550円 ／ おやつ代 50円 が別途かかります。</li>
+                </ul>
+            </div>
+
+            <!-- シミュレーション (ご留意事項の下に入れ替え) -->
+            <div class="bg-slate-800 text-white p-6 md:p-10 rounded-[2rem] shadow-soft-3d flex flex-col md:flex-row items-center justify-between gap-6 fade-up relative overflow-hidden">
+                <!-- 装飾 -->
+                <div class="absolute top-0 right-0 w-32 h-32 bg-primary-500/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2"></div>
+                
+                <div class="font-bold flex items-start sm:items-center gap-4 relative z-10">
+                    <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm shrink-0">
+                        <i data-lucide="calculator" class="w-6 h-6 text-primary-200"></i>
+                    </div>
+                    <span class="tracking-wide flex flex-col lg:block mt-1 sm:mt-0 text-lg md:text-xl font-serif">
+                        要介護１　１回の利用料の目安
+                        <span class="text-sm font-sans font-normal text-primary-200 lg:ml-3 mt-1 lg:mt-0 block lg:inline-block">※入浴・リハビリ加算等を含む</span>
+                    </span>
+                </div>
+                <div class="text-slate-300 font-medium text-left sm:text-center md:text-right text-base md:text-lg relative z-10 shrink-0">
+                    自己負担1割(約900円) ＋ 実費(600円) <br class="md:hidden" /> <span class="hidden md:inline">＝</span> <span class="text-3xl md:text-4xl font-serif font-bold text-white md:ml-2 tracking-wider mt-2 md:mt-0 inline-block">約 1,500円</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="py-24 bg-white relative">
+        <div class="max-w-3xl mx-auto px-4">
+            <div class="text-center mb-16 fade-up">
+                <p class="text-primary-600 font-bold tracking-widest text-sm mb-3">Q&A</p>
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-slate-900">
+                    よくあるご質問
+                </h2>
+            </div>
+
+            <div class="space-y-4">
+                <script>
+                    const faqData = [
+                        { q: "利用する際の持ち物は何が必要ですか？", a: "入浴をご利用の方は【着替え、タオル２枚、ビニール袋】をご用意ください。その他、昼食後の薬（必要な方）、マスク、昼食代（体験利用時のみ）をご持参いただいております。" },
+                        { q: "見学や体験利用はできますか？", a: "はい、随時受け付けております。担当のケアマネージャー様を通してお申し込みいただくか、直接当施設までお電話にてお気軽にご相談ください。" },
+                        { q: "送迎の範囲はどこまでですか？", a: "稙田・稙田南・稙田東包括圏域を中心に対応しております。その他のエリアにお住まいの方も、柔軟に対応できる場合がございますので、まずはお問い合わせください。" },
+                        { q: "どのような人が利用できますか？", a: "要支援認定、または要介護認定を受けられている方が対象となります。" },
+                        { q: "車椅子でも利用できますか？", a: "基本的にはご利用可能です。送迎車の乗降や施設内での移動など、安全にご利用いただける環境を整えております。ご不安な点が見学時に詳しくご案内いたします。" },
+                        { q: "食事のアレルギーや、刻み食などの対応は可能ですか？", a: "事前の面談等でお伺いし、アレルギー対応や、お粥・刻み食などの食形態の変更についても可能な限り対応させていただきます。" }
+                    ];
+
+                    document.write(faqData.map((item, index) => `
+                        <div class="glass-card bg-primary-50/20 border-primary-100/50 rounded-2xl overflow-hidden fade-up" style="transition-delay: ${index * 100}ms">
+                            <button class="faq-btn w-full px-6 md:px-8 py-5 md:py-6 text-left flex justify-between items-center focus:outline-none hover:bg-primary-50 transition-colors">
+                                <span class="font-bold text-slate-900 flex gap-4 items-start text-lg">
+                                    <span class="text-primary-600 font-serif text-2xl leading-none pt-0.5">Q.</span>
+                                    <span class="leading-relaxed">${item.q}</span>
+                                </span>
+                                <div class="w-10 h-10 rounded-full bg-primary-100/50 flex items-center justify-center shrink-0 ml-4">
+                                    <i data-lucide="chevron-down" class="faq-icon text-primary-600 transition-transform duration-500 w-5 h-5"></i>
+                                </div>
+                            </button>
+                            <div class="faq-content overflow-hidden transition-all duration-500 ease-in-out max-h-0 opacity-0 px-6 md:px-8">
+                                <div class="flex gap-4 text-slate-600 py-6 border-t border-primary-100/50">
+                                    <span class="text-secondary-600 font-serif text-2xl leading-none pt-0.5">A.</span>
+                                    <p class="text-base leading-relaxed font-medium">${item.a}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `).join(''));
+                </script>
+            </div>
+        </div>
+    </section>
+
+    <!-- お客様の声 -->
+    <section id="voice" class="py-24 bg-primary-50 relative">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center mb-16 fade-up">
+                <p class="text-primary-600 font-bold tracking-widest text-sm mb-3">VOICE</p>
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-slate-900">
+                    ご利用者様・ご家族様の声
+                </h2>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Voice 1 -->
+                <div class="bg-white p-8 rounded-3xl shadow-soft-3d border border-primary-100/50 relative fade-up">
+                    <div class="absolute -top-4 -left-4 w-12 h-12 bg-primary-500 text-white rounded-full flex items-center justify-center shadow-lg font-serif text-3xl">“</div>
+                    <div class="mb-4">
+                        <span class="text-xs font-bold bg-primary-50 text-primary-600 px-3 py-1 rounded-full">ご利用者様 (80代・女性)</span>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-900 mb-3">「リハビリで歩くのが楽に」</h3>
+                    <p class="text-slate-600 text-base leading-relaxed font-medium">
+                        最初は杖をついて歩くのも一苦労でしたが、理学療法士の先生に丁寧にリハビリをしていただき、今では家の中をスムーズに移動できるようになりました。お友達とのおしゃべりも毎回の楽しみです。
+                    </p>
+                </div>
+
+                <!-- Voice 2 -->
+                <div class="bg-white p-8 rounded-3xl shadow-soft-3d border border-secondary-100/50 relative fade-up delay-100">
+                    <div class="absolute -top-4 -left-4 w-12 h-12 bg-secondary-500 text-white rounded-full flex items-center justify-center shadow-lg font-serif text-3xl">“</div>
+                    <div class="mb-4">
+                        <span class="text-xs font-bold bg-secondary-50 text-secondary-600 px-3 py-1 rounded-full">ご家族様</span>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-900 mb-3">「安心してお任せできます」</h3>
+                    <p class="text-slate-600 text-base leading-relaxed font-medium">
+                        自宅での入浴が困難になり悩んでいましたが、こちらのリフト浴を利用するようになってから本人の表情も明るくなりました。スタッフの皆さんがいつも笑顔で優しく接してくださり、家族としても助かっています。
+                    </p>
+                </div>
+
+                <!-- Voice 3 -->
+                <div class="bg-white p-8 rounded-3xl shadow-soft-3d border border-primary-100/50 relative fade-up delay-200">
+                    <div class="absolute -top-4 -left-4 w-12 h-12 bg-primary-500 text-white rounded-full flex items-center justify-center shadow-lg font-serif text-3xl">“</div>
+                    <div class="mb-4">
+                        <span class="text-xs font-bold bg-primary-50 text-primary-600 px-3 py-1 rounded-full">ご利用者様 (70代・男性)</span>
+                    </div>
+                    <h3 class="font-bold text-lg text-slate-900 mb-3">「外出レクが良い気分転換に」</h3>
+                    <p class="text-slate-600 text-base leading-relaxed font-medium">
+                        家に引きこもりがちでしたが、2ヶ月に1回の外出レクリエーションのおかげで、季節の変化を感じられるようになりました。先日の佐賀関ツアーでの美味しい食事は最高の思い出です。
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 施設情報 & アクセス -->
+    <section id="info" class="py-24 bg-white relative">
+        <div class="max-w-5xl mx-auto px-4">
+            <div class="text-center mb-16 fade-up">
+                <p class="text-primary-600 font-bold tracking-widest text-sm mb-3">ACCESS</p>
+                <h2 class="text-3xl md:text-4xl font-serif font-bold text-slate-900">
+                    施設情報・アクセス
+                </h2>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-10 items-stretch">
+                <!-- 情報テキスト -->
+                <div class="bg-white p-8 md:p-10 rounded-[2rem] border border-primary-100 shadow-soft-3d space-y-8 h-full fade-up">
+                    <div class="flex gap-5 border-b border-primary-100/80 pb-6">
+                        <div class="w-12 h-12 rounded-full bg-primary-50 flex items-center justify-center shrink-0"><i data-lucide="map-pin" class="text-primary-500 w-6 h-6"></i></div>
+                        <div>
+                            <div class="text-sm font-bold text-primary-500 tracking-widest mb-1">LOCATION</div>
+                            <div class="text-slate-900 font-bold leading-relaxed text-lg">〒870-1143<br/>大分県大分市大字田尻字高尾783-1</div>
+                        </div>
+                    </div>
+                    <div class="flex gap-5 border-b border-primary-100/80 pb-6">
+                        <div class="w-12 h-12 rounded-full bg-primary-50 flex items-center justify-center shrink-0"><i data-lucide="users" class="text-primary-500 w-6 h-6"></i></div>
+                        <div>
+                            <div class="text-sm font-bold text-primary-500 tracking-widest mb-1">CAPACITY</div>
+                            <div class="text-slate-900 font-bold leading-relaxed text-lg">要支援・要介護認定を受けられている方<br/><span class="text-base text-slate-500 font-medium">定員：35名</span></div>
+                        </div>
+                    </div>
+                    <div class="flex gap-5 border-b border-primary-100/80 pb-6">
+                        <div class="w-12 h-12 rounded-full bg-primary-50 flex items-center justify-center shrink-0"><i data-lucide="calendar" class="text-primary-500 w-6 h-6"></i></div>
+                        <div>
+                            <div class="text-sm font-bold text-primary-500 tracking-widest mb-1">HOURS</div>
+                            <div class="text-slate-900 font-bold leading-relaxed text-lg">月曜〜土曜営業 <span class="text-base text-slate-500 font-medium">（日曜休み）</span></div>
+                        </div>
+                    </div>
+                    <div class="flex gap-5">
+                        <div class="w-12 h-12 rounded-full bg-primary-50 flex items-center justify-center shrink-0"><i data-lucide="map" class="text-primary-500 w-6 h-6"></i></div>
+                        <div>
+                            <div class="text-sm font-bold text-primary-500 tracking-widest mb-1">AREA</div>
+                            <div class="text-slate-900 font-bold leading-relaxed text-lg">稙田・稙田南・稙田東包括圏域を中心<br/><span class="text-base text-slate-500 font-medium">※その他のエリアもご相談ください</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Google Maps -->
+                <div class="rounded-[2rem] overflow-hidden shadow-soft-3d border border-primary-100 relative h-full min-h-[400px] fade-up delay-100 group">
+                    <!-- pointer-events-none とグレースケールフィルターを削除し、直接操作可能に -->
+                    <iframe 
+                        src="https://maps.google.com/maps?q=大分県大分市大字田尻字高尾783-1&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                        class="absolute top-0 left-0 w-full h-full"
+                        style="border: 0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="元気デイきらら マップ"
+                    ></iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="contact" class="py-24 bg-gradient-to-br from-primary-900 to-slate-900 text-white relative overflow-hidden">
+        <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary-500/20 via-transparent to-transparent"></div>
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10">
+            <h2 class="text-3xl md:text-4xl font-serif font-bold mb-6">見学・ご相談は随時受付中</h2>
+            <p class="mb-12 text-primary-100/80 font-medium leading-relaxed">
+                担当ケアマネージャー様を通じてもご相談可能です。<br class="hidden sm:block" />
+                ご不明な点がございましたら、お気軽にお問い合わせください。
+            </p>
+            
+            <div class="bg-white/5 backdrop-blur-lg border border-white/10 rounded-[2.5rem] p-8 md:p-12 max-w-2xl mx-auto shadow-2xl fade-up">
+                <p class="font-bold mb-2 text-white tracking-wider">社会福祉法人三愛会 元気デイきらら</p>
+                <p class="text-sm text-primary-100/60 mb-8 flex items-center justify-center gap-2 font-medium">
+                    <i data-lucide="map-pin" class="w-4 h-4"></i> 大分県大分市大字田尻字高尾783-1
+                </p>
+                <a href="tel:097-578-7320" class="inline-flex items-center justify-center gap-4 text-3xl md:text-5xl font-sans font-bold text-white hover:text-primary-200 transition-colors bg-white/10 px-8 md:px-12 py-6 rounded-full border border-white/20 w-full sm:w-auto btn-shine group">
+                    <div class="w-12 h-12 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 flex items-center justify-center group-hover:bg-white group-hover:text-primary-500 transition-colors">
+                        <i data-lucide="phone" class="w-6 h-6"></i>
+                    </div>
+                    097-578-7320
+                </a>
+                <p class="mt-6 text-xs text-primary-100/40 font-medium">※スマートフォンをご利用の方は、番号をタップすると発信できます。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-white/10 text-slate-400 py-10 text-center text-base font-medium">
+        <div class="max-w-5xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p>社会福祉法人三愛会 元気デイきらら</p>
+            <p>© Social Welfare corporation Sanaikai. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- 制御用 JavaScript -->
+    <script>
+        // 1. Lucideアイコンの初期化描画
+        lucide.createIcons();
+
+        // 2. Intersection Observer (スクロールアニメーション)
+        document.addEventListener("DOMContentLoaded", () => {
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px 0px -10% 0px', // 少し画面に入ってから発火
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // 1度だけ実行
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.fade-up').forEach(element => {
+                observer.observe(element);
+            });
+        });
+
+        // 3. スムーズスクロール
+        document.querySelectorAll('a.smooth-scroll').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#' || !targetId.startsWith('#')) return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    e.preventDefault();
+                    const headerOffset = 70;
+                    const elementPosition = targetElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+                    window.scrollTo({
+                        top: offsetPosition,
+                        behavior: "smooth"
+                    });
+                }
+            });
+        });
+
+        // 4. FAQ アコーディオン
+        const faqButtons = document.querySelectorAll('.faq-btn');
+        faqButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const icon = button.querySelector('.faq-icon');
+                const isOpen = content.classList.contains('opacity-100');
+
+                // 他を閉じる
+                document.querySelectorAll('.faq-content').forEach(el => {
+                    el.classList.remove('max-h-64', 'opacity-100');
+                    el.classList.add('max-h-0', 'opacity-0');
+                });
+                document.querySelectorAll('.faq-icon').forEach(el => {
+                    el.classList.remove('rotate-180');
+                });
+
+                // 開閉トグル
+                if (!isOpen) {
+                    content.classList.remove('max-h-0', 'opacity-0');
+                    content.classList.add('max-h-64', 'opacity-100'); // max-h は内容量に合わせて余裕を持たせる
+                    icon.classList.add('rotate-180');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
