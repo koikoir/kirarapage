@@ -58,6 +58,9 @@
     <script src="https://unpkg.com/lucide@latest"></script>
 
     <style>
+        /* htmlのfont-sizeに対するトランジション（文字サイズ変更用） */
+        html { transition: font-size 0.3s ease; }
+
         /* スクロールバー非表示 */
         .hide-scrollbar::-webkit-scrollbar { display: none; }
         .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -126,34 +129,72 @@
         .btn-shine:hover::after {
             left: 200%;
         }
+
+        /* FAB用アニメーション */
+        .fab-enter {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fabEnterAnim 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
+        }
+        @keyframes fabEnterAnim {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 <body class="min-h-screen bg-primary-50 font-sans text-slate-800 scroll-smooth selection:bg-secondary-200 selection:text-slate-900">
 
     <!-- Header (上部固定メニュー) -->
-    <header class="bg-white/80 backdrop-blur-md border-b border-primary-100 sticky top-0 z-50 transition-all duration-300">
+    <header class="bg-white/90 backdrop-blur-md border-b border-primary-100 sticky top-0 z-40 transition-all duration-300">
+        <!-- 上部ユーティリティバー（PC表示用 文字サイズ変更） -->
+        <div class="bg-slate-50 border-b border-slate-100 hidden sm:block">
+            <div class="max-w-5xl mx-auto px-4 py-1 flex justify-end items-center">
+                <div class="flex items-center gap-1 text-[11px] text-slate-600 bg-slate-200/50 rounded-md p-0.5">
+                    <span class="font-bold px-2">文字サイズ</span>
+                    <button class="font-size-btn px-2.5 py-0.5 rounded bg-white text-slate-800 shadow-sm font-bold border border-slate-200 transition-colors" data-size="normal">標準</button>
+                    <button class="font-size-btn px-2.5 py-0.5 rounded text-slate-500 hover:bg-white/50 font-bold transition-colors border border-transparent" data-size="large">大</button>
+                </div>
+            </div>
+        </div>
+
         <div class="max-w-5xl mx-auto px-4 py-3 flex flex-col md:flex-row justify-between items-center gap-3 md:gap-0">
             <div class="flex justify-between w-full md:w-auto items-center">
                 <a href="#hero" class="block cursor-pointer smooth-scroll group">
                     <p class="text-[10px] tracking-widest text-slate-500 font-medium mb-0.5">社会福祉法人三愛会</p>
                     <h1 class="text-xl md:text-2xl font-serif font-bold text-primary-800 tracking-wider group-hover:text-primary-500 transition-colors">元気デイきらら</h1>
                 </a>
-                <a href="tel:097-578-7320" class="md:hidden flex items-center gap-1 bg-gradient-to-r from-primary-500 to-secondary-500 text-white px-4 py-2 rounded-full font-medium text-xs shadow-soft-3d shadow-inner-light">
-                    <i data-lucide="phone" class="w-3.5 h-3.5"></i> 発信
-                </a>
+                
+                <!-- スマホ向けUI（文字サイズ変更） -->
+                <div class="flex items-center gap-2 md:hidden">
+                    <div class="flex items-center bg-slate-100 p-0.5 rounded-md border border-slate-200">
+                        <span class="text-[9px] font-bold text-slate-500 px-1 hidden min-[360px]:inline">文字</span>
+                        <button class="font-size-btn px-2 py-0.5 text-[10px] rounded bg-white text-slate-800 shadow-sm font-bold" data-size="normal">標準</button>
+                        <button class="font-size-btn px-2 py-0.5 text-[10px] font-bold text-slate-500" data-size="large">大</button>
+                    </div>
+                </div>
             </div>
             
             <!-- ナビゲーションメニュー -->
-            <nav class="w-full md:w-auto overflow-x-auto hide-scrollbar">
-                <ul class="flex items-center gap-5 md:gap-8 text-base font-medium text-slate-600 whitespace-nowrap pb-1 md:pb-0">
+            <nav class="w-full md:w-auto mt-2 md:mt-0">
+                <!-- PC用ナビゲーション -->
+                <ul class="hidden md:flex items-center gap-5 md:gap-8 text-base font-medium text-slate-600 whitespace-nowrap">
                     <li><a href="#strengths" class="smooth-scroll hover:text-primary-600 transition-colors py-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary-500 after:transition-all hover:after:w-full cursor-pointer">３つの特徴</a></li>
                     <li><a href="#plans" class="smooth-scroll hover:text-primary-600 transition-colors py-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary-500 after:transition-all hover:after:w-full cursor-pointer">プラン</a></li>
                     <li><a href="#schedule" class="smooth-scroll hover:text-primary-600 transition-colors py-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary-500 after:transition-all hover:after:w-full cursor-pointer">1日の流れ</a></li>
-                    <li><a href="#recreation" class="smooth-scroll hover:text-primary-600 transition-colors py-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary-500 after:transition-all hover:after:w-full cursor-pointer">外出レク</a></li>
                     <li><a href="#pricing" class="smooth-scroll hover:text-primary-600 transition-colors py-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary-500 after:transition-all hover:after:w-full cursor-pointer">料金表</a></li>
-                    <li><a href="#faq" class="smooth-scroll hover:text-primary-600 transition-colors py-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary-500 after:transition-all hover:after:w-full cursor-pointer">Q&A</a></li>
                     <li><a href="#voice" class="smooth-scroll hover:text-primary-600 transition-colors py-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary-500 after:transition-all hover:after:w-full cursor-pointer">お客様の声</a></li>
                     <li><a href="#info" class="smooth-scroll hover:text-primary-600 transition-colors py-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary-500 after:transition-all hover:after:w-full cursor-pointer">施設情報</a></li>
+                </ul>
+
+                <!-- スマホ用ナビゲーション（コンバージョンに直結する項目のみに絞り、折り返し表示） -->
+                <ul class="flex md:hidden flex-wrap justify-between gap-y-2 text-[13px] font-bold text-slate-600 px-1 pt-3 pb-1 border-t border-slate-100">
+                    <li><a href="#strengths" class="smooth-scroll hover:text-primary-600 transition-colors bg-slate-50 px-3 py-1.5 rounded-full border border-slate-200">特徴</a></li>
+                    <li><a href="#plans" class="smooth-scroll hover:text-primary-600 transition-colors bg-slate-50 px-3 py-1.5 rounded-full border border-slate-200">プラン</a></li>
+                    <li><a href="#schedule" class="smooth-scroll hover:text-primary-600 transition-colors bg-slate-50 px-3 py-1.5 rounded-full border border-slate-200">1日の流れ</a></li>
+                    <li><a href="#pricing" class="smooth-scroll hover:text-primary-600 transition-colors bg-slate-50 px-3 py-1.5 rounded-full border border-slate-200">料金表</a></li>
+                    <li><a href="#info" class="smooth-scroll hover:text-primary-600 transition-colors bg-slate-50 px-3 py-1.5 rounded-full border border-slate-200">アクセス</a></li>
                 </ul>
             </nav>
 
@@ -164,13 +205,24 @@
         </div>
     </header>
 
+    <!-- 常時表示CTA (Floating Action Button) -->
+    <div class="fixed bottom-6 right-6 z-50 fab-enter pointer-events-none">
+        <a href="tel:097-578-7320" class="pointer-events-auto flex items-center justify-center gap-3 bg-gradient-to-r from-primary-500 to-secondary-500 text-white w-14 h-14 md:w-auto md:px-6 md:py-2.5 md:h-auto rounded-full shadow-[0_10px_25px_-5px_rgba(0,175,204,0.4)] hover:shadow-[0_15px_30px_-5px_rgba(0,175,204,0.6)] hover:-translate-y-1 transition-all duration-300 btn-shine group border border-white/20">
+            <i data-lucide="phone" class="w-6 h-6 md:w-6 md:h-6 fill-white/20"></i>
+            <span class="hidden md:flex flex-col items-start justify-center">
+                <span class="text-[11px] font-medium text-white/90 mb-0.5 tracking-wider leading-none">担当：小出</span>
+                <span class="font-bold text-lg tracking-wider leading-none">見学・ご相談はこちら</span>
+            </span>
+        </a>
+    </div>
+
     <!-- Hero Section -->
     <section id="hero" class="relative bg-gradient-animate overflow-hidden">
         <!-- 背景の装飾的な3D要素 (ぼかし円) -->
         <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[50%] rounded-full bg-primary-200/40 blur-3xl"></div>
         <div class="absolute bottom-[-10%] right-[-5%] w-[30%] h-[40%] rounded-full bg-secondary-200/40 blur-3xl"></div>
 
-        <div class="max-w-4xl mx-auto px-4 py-24 md:py-36 text-center space-y-10 relative z-10 fade-up">
+        <div class="max-w-4xl mx-auto px-4 py-20 md:py-36 text-center space-y-10 relative z-10 fade-up">
             <h2 class="text-3xl md:text-5xl lg:text-6xl font-serif font-bold text-slate-900 leading-[1.5] md:leading-[1.4] tracking-wider">
                 趣味と会話で彩る、<br />
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-secondary-600 text-4xl md:text-6xl lg:text-7xl block mt-6 relative inline-block">
@@ -181,9 +233,9 @@
             <p class="text-xl md:text-2xl text-slate-600 font-medium tracking-widest leading-relaxed">
                 男性も女性も自分らしく。<br class="md:hidden" />笑顔になれるアットホームな空間。
             </p>
-            <div class="pt-8 flex justify-center fade-up delay-200">
+            <div class="pt-8 flex justify-center fade-up delay-200 hidden md:flex">
                 <a href="#contact" class="smooth-scroll inline-flex items-center justify-center px-12 py-5 text-lg font-medium text-white bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full shadow-soft-3d shadow-inner-light transition-all hover:shadow-soft-3d-hover hover:-translate-y-0.5 gap-3 cursor-pointer btn-shine">
-                    見学・ご相談はこちら <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    施設へのお問い合わせ <i data-lucide="arrow-right" class="w-5 h-5"></i>
                 </a>
             </div>
         </div>
@@ -314,51 +366,8 @@
                 <p class="mt-4 text-slate-500 font-medium text-sm">※基本プランの場合</p>
             </div>
             
-            <div class="relative border-l border-primary-100 ml-4 md:ml-12 py-4 space-y-10">
-                
-                <!-- タイムラインアイテム用のテンプレート構造 -->
-                <script>
-                    const scheduleData = [
-                        { time: '9:15', title: '到着', desc: '' },
-                        { time: '9:30', title: 'バイタルチェック', desc: '血圧や体温などを測定し、当日の体調を確認します。' },
-                        { time: '10:00', title: '入浴・歩行訓練', desc: '安全な環境での入浴や、身体機能に合わせた歩行訓練を行います。' },
-                        { time: '10:30', title: '集団体操', desc: 'ストレッチやボールゴム体操で、無理なく身体をほぐします。' },
-                        { time: '11:45', title: '平行棒訓練', desc: '下肢筋力の維持・向上を目指します。' },
-                        { time: '12:00', title: '口腔体操', desc: 'お食事の前に、安全に飲み込むための体操を行います。' },
-                        { time: '12:20', title: '昼食', desc: '温かく栄養バランスの取れたお食事をご提供します。' },
-                        { time: '13:00', title: '個別活動', desc: 'お一人おひとりのペースで過ごしていただきます。' },
-                        { type: 'info', text: '半日利用プランは13:30で終了・お送りとなります' },
-                        { time: '14:00', title: 'きらら体操', desc: '施設オリジナルの体操で身体を動かします。' },
-                        { time: '14:30', title: '個別活動', desc: '脳トレ、生活訓練、手芸、囲碁、将棋、麻雀などをご提供します。' },
-                        { time: '15:30', title: 'おやつ', desc: 'ホッと一息つけるおやつの時間です。' },
-                        { time: '16:30', title: 'お送り', desc: 'ご自宅まで安全にお送りいたします。' }
-                    ];
-
-                    document.write(scheduleData.map((item, index) => {
-                        if(item.type === 'info') {
-                            return `
-                            <div class="ml-8 relative flex items-center fade-up" style="transition-delay: ${index%3 * 100}ms">
-                                <div class="absolute -left-[2.05rem] w-8 border-t border-dashed border-secondary-300"></div>
-                                <div class="bg-secondary-50 text-secondary-900 text-base font-bold px-5 py-3 rounded-xl border border-secondary-200 flex items-center gap-3 w-full backdrop-blur-sm">
-                                    <i data-lucide="info" class="w-5 h-5 text-secondary-600"></i> ${item.text}
-                                </div>
-                            </div>
-                            `;
-                        }
-                        return `
-                        <div class="ml-8 relative group fade-up" style="transition-delay: ${index%3 * 100}ms">
-                            <span class="absolute -left-[2.4rem] w-4 h-4 bg-white rounded-full border-[3px] border-primary-300 shadow-sm transition-all duration-300 group-hover:bg-primary-500 group-hover:scale-125 group-hover:border-white z-10 mt-1.5"></span>
-                            <div class="flex flex-col md:flex-row md:items-start gap-3 md:gap-6">
-                                <span class="font-bold text-xl md:text-2xl text-primary-800 w-24 pt-0.5 tracking-wider font-serif">${item.time}</span>
-                                <div class="bg-primary-50/30 p-5 rounded-2xl flex-1 shadow-sm border border-primary-100/50 group-hover:shadow-soft-3d transition-all duration-300 transform group-hover:-translate-y-1">
-                                    <h4 class="font-bold text-slate-900 text-xl">${item.title}</h4>
-                                    ${item.desc ? `<p class="text-slate-600 mt-2 text-base leading-relaxed font-medium">${item.desc}</p>` : ''}
-                                </div>
-                            </div>
-                        </div>
-                        `;
-                    }).join(''));
-                </script>
+            <div id="schedule-container" class="relative border-l border-primary-100 ml-4 md:ml-12 py-4 space-y-10">
+                <!-- JavaScriptで動的に生成されます -->
             </div>
         </div>
     </section>
@@ -416,7 +425,6 @@
                 </h2>
             </div>
 
-            <!-- items-start を追加し、各カードがコンテンツの高さに合わせて独立するように調整 -->
             <div class="grid lg:grid-cols-2 gap-8 mb-12 items-start">
                 <!-- 要支援 -->
                 <div class="glass-card rounded-[2rem] overflow-hidden flex flex-col fade-up bg-white">
@@ -593,7 +601,6 @@
 
             <!-- シミュレーション -->
             <div class="bg-slate-800 text-white p-6 md:p-10 rounded-[2rem] shadow-soft-3d flex flex-col md:flex-row items-center justify-between gap-6 fade-up relative overflow-hidden">
-                <!-- 装飾 -->
                 <div class="absolute top-0 right-0 w-32 h-32 bg-primary-500/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2"></div>
                 
                 <div class="font-bold flex items-start sm:items-center gap-4 relative z-10">
@@ -625,42 +632,13 @@
                 </h2>
             </div>
 
-            <div class="space-y-4">
-                <script>
-                    const faqData = [
-                        { q: "利用する際の持ち物は何が必要ですか？", a: "入浴をご利用の方は【着替え、タオル２枚、ビニール袋】をご用意ください。その他、昼食後の薬（必要な方）、マスク、昼食代（体験利用時のみ）をご持参いただいております。" },
-                        { q: "見学や体験利用はできますか？", a: "はい、随時受け付けております。担当のケアマネージャー様を通してお申し込みいただくか、直接当施設までお電話にてお気軽にご相談ください。" },
-                        { q: "送迎の範囲はどこまでですか？", a: "稙田・稙田南・稙田東包括圏域を中心に対応しております。その他のエリアにお住まいの方も、柔軟に対応できる場合がございますので、まずはお問い合わせください。" },
-                        { q: "どのような人が利用できますか？", a: "要支援認定、または要介護認定を受けられている方が対象となります。" },
-                        { q: "車椅子でも利用できますか？", a: "基本的にはご利用可能です。送迎車の乗降や施設内での移動など、安全にご利用いただける環境を整えております。ご不安な点が見学時に詳しくご案内いたします。" },
-                        { q: "食事のアレルギーや、刻み食などの対応は可能ですか？", a: "事前の面談等でお伺いし、アレルギー対応や、お粥・刻み食などの食形態の変更についても可能な限り対応させていただきます。" }
-                    ];
-
-                    document.write(faqData.map((item, index) => `
-                        <div class="glass-card bg-primary-50/20 border-primary-100/50 rounded-2xl overflow-hidden fade-up" style="transition-delay: ${index * 100}ms">
-                            <button class="faq-btn w-full px-6 md:px-8 py-5 md:py-6 text-left flex justify-between items-center focus:outline-none hover:bg-primary-50 transition-colors">
-                                <span class="font-bold text-slate-900 flex gap-4 items-start text-lg">
-                                    <span class="text-primary-600 font-serif text-2xl leading-none pt-0.5">Q.</span>
-                                    <span class="leading-relaxed">${item.q}</span>
-                                </span>
-                                <div class="w-10 h-10 rounded-full bg-primary-100/50 flex items-center justify-center shrink-0 ml-4">
-                                    <i data-lucide="chevron-down" class="faq-icon text-primary-600 transition-transform duration-500 w-5 h-5"></i>
-                                </div>
-                            </button>
-                            <div class="faq-content overflow-hidden transition-all duration-500 ease-in-out max-h-0 opacity-0 px-6 md:px-8">
-                                <div class="flex gap-4 text-slate-600 py-6 border-t border-primary-100/50">
-                                    <span class="text-secondary-600 font-serif text-2xl leading-none pt-0.5">A.</span>
-                                    <p class="text-base leading-relaxed font-medium">${item.a}</p>
-                                </div>
-                            </div>
-                        </div>
-                    `).join(''));
-                </script>
+            <div id="faq-container" class="space-y-4">
+                <!-- JavaScriptで動的に生成されます -->
             </div>
         </div>
     </section>
 
-    <!-- お客様の声 -->
+    <!-- お客様の声 (アバターアイコン追加版) -->
     <section id="voice" class="py-24 bg-primary-50 relative">
         <div class="max-w-5xl mx-auto px-4">
             <div class="text-center mb-16 fade-up">
@@ -674,8 +652,11 @@
                 <!-- Voice 1 -->
                 <div class="bg-white p-8 rounded-3xl shadow-soft-3d border border-primary-100/50 relative fade-up">
                     <div class="absolute -top-4 -left-4 w-12 h-12 bg-primary-500 text-white rounded-full flex items-center justify-center shadow-lg font-serif text-3xl">“</div>
-                    <div class="mb-4">
-                        <span class="text-xs font-bold bg-primary-50 text-primary-600 px-3 py-1 rounded-full">ご利用者様 (80代・女性)</span>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-rose-50 border border-rose-100 flex items-center justify-center text-rose-500 shrink-0">
+                            <i data-lucide="user" class="w-5 h-5"></i>
+                        </div>
+                        <span class="text-xs font-bold bg-primary-50 text-primary-600 px-3 py-1.5 rounded-full">ご利用者様 (80代・女性)</span>
                     </div>
                     <h3 class="font-bold text-lg text-slate-900 mb-3">「リハビリで歩くのが楽に」</h3>
                     <p class="text-slate-600 text-base leading-relaxed font-medium">
@@ -686,8 +667,11 @@
                 <!-- Voice 2 -->
                 <div class="bg-white p-8 rounded-3xl shadow-soft-3d border border-secondary-100/50 relative fade-up delay-100">
                     <div class="absolute -top-4 -left-4 w-12 h-12 bg-secondary-500 text-white rounded-full flex items-center justify-center shadow-lg font-serif text-3xl">“</div>
-                    <div class="mb-4">
-                        <span class="text-xs font-bold bg-secondary-50 text-secondary-600 px-3 py-1 rounded-full">ご家族様</span>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 rounded-full bg-secondary-50 border border-secondary-100 flex items-center justify-center text-secondary-600 shrink-0">
+                            <i data-lucide="users" class="w-5 h-5"></i>
+                        </div>
+                        <span class="text-xs font-bold bg-secondary-50 text-secondary-600 px-3 py-1.5 rounded-full">ご家族様</span>
                     </div>
                     <h3 class="font-bold text-lg text-slate-900 mb-3">「安心してお任せできます」</h3>
                     <p class="text-slate-600 text-base leading-relaxed font-medium">
@@ -695,11 +679,14 @@
                     </p>
                 </div>
 
-                <!-- Voice 3 -->
-                <div class="bg-white p-8 rounded-3xl shadow-soft-3d border border-primary-100/50 relative fade-up delay-200">
+                <!-- Voice 3 (男性を視覚的に強調) -->
+                <div class="bg-white p-8 rounded-3xl shadow-soft-3d border border-primary-200/60 relative fade-up delay-200">
                     <div class="absolute -top-4 -left-4 w-12 h-12 bg-primary-500 text-white rounded-full flex items-center justify-center shadow-lg font-serif text-3xl">“</div>
-                    <div class="mb-4">
-                        <span class="text-xs font-bold bg-primary-50 text-primary-600 px-3 py-1 rounded-full">ご利用者様 (70代・男性)</span>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-11 h-11 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white shrink-0 shadow-md">
+                            <i data-lucide="user" class="w-6 h-6"></i>
+                        </div>
+                        <span class="text-xs font-bold bg-primary-50 text-primary-600 px-3 py-1.5 rounded-full">ご利用者様 (70代・男性)</span>
                     </div>
                     <h3 class="font-bold text-lg text-slate-900 mb-3">「外出レクが良い気分転換に」</h3>
                     <p class="text-slate-600 text-base leading-relaxed font-medium">
@@ -755,7 +742,6 @@
 
                 <!-- Google Maps -->
                 <div class="rounded-[2rem] overflow-hidden shadow-soft-3d border border-primary-100 relative h-full min-h-[400px] fade-up delay-100 group">
-                    <!-- pointer-events-none とグレースケールフィルターを削除し、直接操作可能に -->
                     <iframe 
                         src="https://maps.google.com/maps?q=大分県大分市大字田尻字高尾783-1&t=&z=15&ie=UTF8&iwloc=&output=embed" 
                         class="absolute top-0 left-0 w-full h-full"
@@ -782,15 +768,23 @@
             
             <div class="bg-white/5 backdrop-blur-lg border border-white/10 rounded-[2.5rem] p-8 md:p-12 max-w-2xl mx-auto shadow-2xl fade-up">
                 <p class="font-bold mb-2 text-white tracking-wider">社会福祉法人三愛会 元気デイきらら</p>
-                <p class="text-sm text-primary-100/60 mb-8 flex items-center justify-center gap-2 font-medium">
+                <p class="text-sm text-primary-100/60 mb-6 flex items-center justify-center gap-2 font-medium">
                     <i data-lucide="map-pin" class="w-4 h-4"></i> 大分県大分市大字田尻字高尾783-1
                 </p>
-                <a href="tel:097-578-7320" class="inline-flex items-center justify-center gap-4 text-3xl md:text-5xl font-sans font-bold text-white hover:text-primary-200 transition-colors bg-white/10 px-8 md:px-12 py-6 rounded-full border border-white/20 w-full sm:w-auto btn-shine group">
-                    <div class="w-12 h-12 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 flex items-center justify-center group-hover:bg-white group-hover:text-primary-500 transition-colors">
-                        <i data-lucide="phone" class="w-6 h-6"></i>
-                    </div>
-                    097-578-7320
-                </a>
+                
+                <div class="inline-flex items-center gap-2 bg-primary-500/20 px-5 py-2.5 rounded-full border border-primary-400/30 mb-8">
+                    <i data-lucide="user-check" class="w-5 h-5 text-primary-300"></i>
+                    <span class="text-base md:text-lg font-bold text-white tracking-wider">担当相談員：小出・藤澤</span>
+                </div>
+
+                <div class="flex justify-center">
+                    <a href="tel:097-578-7320" class="inline-flex items-center justify-center gap-4 text-3xl md:text-5xl font-sans font-bold text-white hover:text-primary-200 transition-colors bg-white/10 px-8 md:px-12 py-6 rounded-full border border-white/20 w-full sm:w-auto btn-shine group">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-r from-primary-500 to-secondary-500 flex items-center justify-center group-hover:bg-white group-hover:text-primary-500 transition-colors">
+                            <i data-lucide="phone" class="w-6 h-6"></i>
+                        </div>
+                        097-578-7320
+                    </a>
+                </div>
                 <p class="mt-6 text-xs text-primary-100/40 font-medium">※スマートフォンをご利用の方は、番号をタップすると発信できます。</p>
             </div>
         </div>
@@ -806,14 +800,125 @@
 
     <!-- 制御用 JavaScript -->
     <script>
-        // 1. Lucideアイコンの初期化描画
-        lucide.createIcons();
-
-        // 2. Intersection Observer (スクロールアニメーション)
         document.addEventListener("DOMContentLoaded", () => {
+            
+            // --- UI 改善: 文字サイズ変更ロジック ---
+            const fontSizeBtns = document.querySelectorAll('.font-size-btn');
+            const rootElement = document.documentElement;
+
+            fontSizeBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const selectedSize = e.target.dataset.size;
+                    
+                    // 全てのボタンのスタイルを更新
+                    fontSizeBtns.forEach(b => {
+                        if (b.dataset.size === selectedSize) {
+                            // 選択状態のスタイル
+                            b.classList.add('bg-white', 'text-slate-800', 'shadow-sm', 'border-slate-200');
+                            b.classList.remove('text-slate-500', 'border-transparent', 'hover:bg-white', 'hover:bg-white/50');
+                        } else {
+                            // 非選択状態のスタイル
+                            b.classList.remove('bg-white', 'text-slate-800', 'shadow-sm', 'border-slate-200');
+                            b.classList.add('text-slate-500', 'border-transparent', 'hover:bg-white');
+                        }
+                    });
+
+                    // 実際のフォントサイズ変更 (HTMLのルートフォントサイズを変更して全体をスケーリング)
+                    // 注: これは Tailwind CSS の rem 指定と連動して機能します
+                    if (selectedSize === 'large') {
+                        rootElement.style.fontSize = '112.5%'; // デフォルト16pxを18px相当に拡大
+                    } else {
+                        rootElement.style.fontSize = '100%';  // デフォルトの16pxに戻す
+                    }
+                });
+            });
+
+
+            // 1. スケジュールデータの動的生成
+            const scheduleData = [
+                { time: '9:15', title: '到着', desc: '' },
+                { time: '9:30', title: 'バイタルチェック', desc: '血圧や体温などを測定し、当日の体調を確認します。' },
+                { time: '10:00', title: '入浴・歩行訓練', desc: '安全な環境での入浴や、身体機能に合わせた歩行訓練を行います。' },
+                { time: '10:30', title: '集団体操', desc: 'ストレッチやボールゴム体操で、無理なく身体をほぐします。' },
+                { time: '11:45', title: '平行棒訓練', desc: '下肢筋力の維持・向上を目指します。' },
+                { time: '12:00', title: '口腔体操', desc: 'お食事の前に、安全に飲み込むための体操を行います。' },
+                { time: '12:20', title: '昼食', desc: '温かく栄養バランスの取れたお食事をご提供します。' },
+                { time: '13:00', title: '個別活動', desc: 'お一人おひとりのペースで過ごしていただきます。' },
+                { type: 'info', text: '半日利用プランは13:30で終了・お送りとなります' },
+                { time: '14:00', title: 'きらら体操', desc: '施設オリジナルの体操で身体を動かします。' },
+                { time: '14:30', title: '個別活動', desc: '脳トレ、生活訓練、手芸、囲碁、将棋、麻雀などをご提供します。' },
+                { time: '15:30', title: 'おやつ', desc: 'ホッと一息つけるおやつの時間です。' },
+                { time: '16:30', title: 'お送り', desc: 'ご自宅まで安全にお送りいたします。' }
+            ];
+
+            const scheduleContainer = document.getElementById('schedule-container');
+            if (scheduleContainer) {
+                scheduleContainer.innerHTML = scheduleData.map((item, index) => {
+                    if(item.type === 'info') {
+                        return `
+                        <div class="ml-8 relative flex items-center fade-up" style="transition-delay: ${index%3 * 100}ms">
+                            <div class="absolute -left-[2.05rem] w-8 border-t border-dashed border-secondary-300"></div>
+                            <div class="bg-secondary-50 text-secondary-900 text-base font-bold px-5 py-3 rounded-xl border border-secondary-200 flex items-center gap-3 w-full backdrop-blur-sm">
+                                <i data-lucide="info" class="w-5 h-5 text-secondary-600"></i> ${item.text}
+                            </div>
+                        </div>
+                        `;
+                    }
+                    return `
+                    <div class="ml-8 relative group fade-up" style="transition-delay: ${index%3 * 100}ms">
+                        <span class="absolute -left-[2.4rem] w-4 h-4 bg-white rounded-full border-[3px] border-primary-300 shadow-sm transition-all duration-300 group-hover:bg-primary-500 group-hover:scale-125 group-hover:border-white z-10 mt-1.5"></span>
+                        <div class="flex flex-col md:flex-row md:items-start gap-3 md:gap-6">
+                            <span class="font-bold text-xl md:text-2xl text-primary-800 w-24 pt-0.5 tracking-wider font-serif">${item.time}</span>
+                            <div class="bg-primary-50/30 p-5 rounded-2xl flex-1 shadow-sm border border-primary-100/50 group-hover:shadow-soft-3d transition-all duration-300 transform group-hover:-translate-y-1">
+                                <h4 class="font-bold text-slate-900 text-xl">${item.title}</h4>
+                                ${item.desc ? `<p class="text-slate-600 mt-2 text-base leading-relaxed font-medium">${item.desc}</p>` : ''}
+                            </div>
+                        </div>
+                    </div>
+                    `;
+                }).join('');
+            }
+
+            // 2. FAQデータの動的生成
+            const faqData = [
+                { q: "利用する際の持ち物は何が必要ですか？", a: "入浴をご利用の方は【着替え、タオル２枚、ビニール袋】をご用意ください。その他、昼食後の薬（必要な方）、マスク、昼食代（体験利用時のみ）をご持参いただいております。" },
+                { q: "見学や体験利用はできますか？", a: "はい、随時受け付けております。担当のケアマネージャー様を通してお申し込みいただくか、直接当施設までお電話にてお気軽にご相談ください。" },
+                { q: "送迎の範囲はどこまでですか？", a: "稙田・稙田南・稙田東包括圏域を中心に対応しております。その他のエリアにお住まいの方も、柔軟に対応できる場合がございますので、まずはお問い合わせください。" },
+                { q: "どのような人が利用できますか？", a: "要支援認定、または要介護認定を受けられている方が対象となります。" },
+                { q: "車椅子でも利用できますか？", a: "基本的にはご利用可能です。送迎車の乗降や施設内での移動など、安全にご利用いただける環境を整えております。ご不安な点が見学時に詳しくご案内いたします。" },
+                { q: "食事のアレルギーや、刻み食などの対応は可能ですか？", a: "事前の面談等でお伺いし、アレルギー対応や、お粥・刻み食などの食形態の変更についても可能な限り対応させていただきます。" }
+            ];
+
+            const faqContainer = document.getElementById('faq-container');
+            if (faqContainer) {
+                faqContainer.innerHTML = faqData.map((item, index) => `
+                    <div class="glass-card bg-primary-50/20 border-primary-100/50 rounded-2xl overflow-hidden fade-up" style="transition-delay: ${index * 100}ms">
+                        <button class="faq-btn w-full px-6 md:px-8 py-5 md:py-6 text-left flex justify-between items-center focus:outline-none hover:bg-primary-50 transition-colors">
+                            <span class="font-bold text-slate-900 flex gap-4 items-start text-lg">
+                                <span class="text-primary-600 font-serif text-2xl leading-none pt-0.5">Q.</span>
+                                <span class="leading-relaxed">${item.q}</span>
+                            </span>
+                            <div class="w-10 h-10 rounded-full bg-primary-100/50 flex items-center justify-center shrink-0 ml-4">
+                                <i data-lucide="chevron-down" class="faq-icon text-primary-600 transition-transform duration-500 w-5 h-5"></i>
+                            </div>
+                        </button>
+                        <div class="faq-content overflow-hidden transition-all duration-500 ease-in-out max-h-0 opacity-0 px-6 md:px-8">
+                            <div class="flex gap-4 text-slate-600 py-6 border-t border-primary-100/50">
+                                <span class="text-secondary-600 font-serif text-2xl leading-none pt-0.5">A.</span>
+                                <p class="text-base leading-relaxed font-medium">${item.a}</p>
+                            </div>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // 3. Lucideアイコンの初期化
+            lucide.createIcons();
+
+            // 4. Intersection Observer (スクロールアニメーション)
             const observerOptions = {
                 root: null,
-                rootMargin: '0px 0px -10% 0px', // 少し画面に入ってから発火
+                rootMargin: '0px 0px -10% 0px',
                 threshold: 0.1
             };
 
@@ -821,7 +926,7 @@
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target); // 1度だけ実行
+                        observer.unobserve(entry.target);
                     }
                 });
             }, observerOptions);
@@ -829,52 +934,52 @@
             document.querySelectorAll('.fade-up').forEach(element => {
                 observer.observe(element);
             });
-        });
 
-        // 3. スムーズスクロール
-        document.querySelectorAll('a.smooth-scroll').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                const targetId = this.getAttribute('href');
-                if (targetId === '#' || !targetId.startsWith('#')) return;
-                
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    e.preventDefault();
-                    const headerOffset = 70;
-                    const elementPosition = targetElement.getBoundingClientRect().top;
-                    const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            // 5. スムーズスクロール
+            document.querySelectorAll('a.smooth-scroll').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#' || !targetId.startsWith('#')) return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        e.preventDefault();
+                        const headerOffset = 70;
+                        const elementPosition = targetElement.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-                    window.scrollTo({
-                        top: offsetPosition,
-                        behavior: "smooth"
-                    });
-                }
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: "smooth"
+                        });
+                    }
+                });
             });
-        });
 
-        // 4. FAQ アコーディオン
-        const faqButtons = document.querySelectorAll('.faq-btn');
-        faqButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const content = button.nextElementSibling;
-                const icon = button.querySelector('.faq-icon');
-                const isOpen = content.classList.contains('opacity-100');
+            // 6. FAQ アコーディオン
+            const faqButtons = document.querySelectorAll('.faq-btn');
+            faqButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const icon = button.querySelector('.faq-icon');
+                    const isOpen = content.classList.contains('opacity-100');
 
-                // 他を閉じる
-                document.querySelectorAll('.faq-content').forEach(el => {
-                    el.classList.remove('max-h-64', 'opacity-100');
-                    el.classList.add('max-h-0', 'opacity-0');
+                    // 他を閉じる
+                    document.querySelectorAll('.faq-content').forEach(el => {
+                        el.classList.remove('max-h-[1000px]', 'opacity-100');
+                        el.classList.add('max-h-0', 'opacity-0');
+                    });
+                    document.querySelectorAll('.faq-icon').forEach(el => {
+                        el.classList.remove('rotate-180');
+                    });
+
+                    // 開閉トグル
+                    if (!isOpen) {
+                        content.classList.remove('max-h-0', 'opacity-0');
+                        content.classList.add('max-h-[1000px]', 'opacity-100');
+                        icon.classList.add('rotate-180');
+                    }
                 });
-                document.querySelectorAll('.faq-icon').forEach(el => {
-                    el.classList.remove('rotate-180');
-                });
-
-                // 開閉トグル
-                if (!isOpen) {
-                    content.classList.remove('max-h-0', 'opacity-0');
-                    content.classList.add('max-h-64', 'opacity-100'); // max-h は内容量に合わせて余裕を持たせる
-                    icon.classList.add('rotate-180');
-                }
             });
         });
     </script>
