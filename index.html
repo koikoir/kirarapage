@@ -408,7 +408,7 @@
 
     <!-- 料金表 -->
     <section id="pricing" class="py-24 bg-primary-50 relative">
-        <div class="max-w-4xl mx-auto px-4">
+        <div class="max-w-5xl mx-auto px-4">
             <div class="text-center mb-16 fade-up">
                 <p class="text-primary-600 font-bold tracking-widest text-sm mb-3">PRICING</p>
                 <h2 class="text-3xl md:text-4xl font-serif font-bold text-slate-900">
@@ -416,88 +416,182 @@
                 </h2>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-8 mb-12">
+            <!-- items-start を追加し、各カードがコンテンツの高さに合わせて独立するように調整 -->
+            <div class="grid lg:grid-cols-2 gap-8 mb-12 items-start">
                 <!-- 要支援 -->
                 <div class="glass-card rounded-[2rem] overflow-hidden flex flex-col fade-up bg-white">
                     <div class="bg-primary-100/50 text-primary-900 text-center py-5 border-b border-primary-100">
                         <h3 class="font-serif font-bold text-2xl">要支援の方</h3>
                         <p class="text-sm text-primary-800/80 mt-1 font-medium">※月額の自己負担額（1割負担の場合）</p>
+                        <!-- 高さを合わせるための透明なプレースホルダー -->
+                        <p class="text-sm mt-0.5 font-medium invisible select-none" aria-hidden="true">※9:15〜16:30（7時間以上8時間未満）</p>
                     </div>
                     <div class="p-6 md:p-8 flex-1">
-                        <table class="w-full text-left border-collapse">
-                            <tbody>
-                                <tr class="border-b border-primary-100/50 group transition-colors hover:bg-primary-50/50">
-                                    <td class="py-5 px-2">
-                                        <div class="font-bold text-slate-900 text-lg">要支援 1</div>
-                                        <div class="text-sm text-slate-500 mt-1">週1回程度</div>
-                                    </td>
-                                    <td class="py-5 px-2 text-right whitespace-nowrap">
-                                        <span class="text-3xl font-bold text-primary-800">1,672</span>
-                                        <span class="text-base text-primary-800/60 ml-1">円/月</span>
-                                    </td>
-                                </tr>
-                                <tr class="group transition-colors hover:bg-primary-50/50">
-                                    <td class="py-5 px-2">
-                                        <div class="font-bold text-slate-900 text-lg">要支援 2</div>
-                                        <div class="text-sm text-slate-500 mt-1">週2回程度</div>
-                                    </td>
-                                    <td class="py-5 px-2 text-right whitespace-nowrap">
-                                        <span class="text-3xl font-bold text-primary-800">3,428</span>
-                                        <span class="text-base text-primary-800/60 ml-1">円/月</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <ul class="flex flex-col gap-3">
+                            <li class="flex items-end py-3 px-2 transition-colors hover:bg-primary-50/80 rounded-lg group">
+                                <div class="shrink-0 mb-0.5">
+                                    <div class="font-bold text-slate-900 text-lg">要支援 1</div>
+                                    <div class="text-sm text-slate-500 mt-1">週1回程度</div>
+                                </div>
+                                <div class="flex-grow border-b-2 border-dotted border-primary-300 mx-4 mb-2.5 opacity-60 group-hover:opacity-100 transition-opacity"></div>
+                                <div class="text-right whitespace-nowrap shrink-0">
+                                    <span class="text-3xl font-bold text-primary-800">1,672</span><span class="text-base text-primary-800/60 ml-1">円/月</span>
+                                </div>
+                            </li>
+                            <li class="flex items-end py-3 px-2 transition-colors hover:bg-primary-50/80 rounded-lg group">
+                                <div class="shrink-0 mb-0.5">
+                                    <div class="font-bold text-slate-900 text-lg">要支援 2</div>
+                                    <div class="text-sm text-slate-500 mt-1">週2回程度</div>
+                                </div>
+                                <div class="flex-grow border-b-2 border-dotted border-primary-300 mx-4 mb-2.5 opacity-60 group-hover:opacity-100 transition-opacity"></div>
+                                <div class="text-right whitespace-nowrap shrink-0">
+                                    <span class="text-3xl font-bold text-primary-800">3,428</span><span class="text-base text-primary-800/60 ml-1">円/月</span>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </div>
 
-                <!-- 要介護 -->
+                <!-- 要介護 (1日と半日を縦に統合) -->
                 <div class="glass-card rounded-[2rem] overflow-hidden flex flex-col fade-up delay-100 bg-white">
                     <div class="bg-secondary-100/50 text-secondary-900 text-center py-5 border-b border-secondary-100">
                         <h3 class="font-serif font-bold text-2xl">要介護の方</h3>
-                        <p class="text-sm text-secondary-800/80 mt-1 font-medium">※1回あたりの自己負担額（1割負担の場合）</p>
+                        <p class="text-sm text-secondary-800/80 mt-1 font-medium">※1回あたりの自己負担額（1割の場合）</p>
                     </div>
-                    <div class="p-6 md:p-8 flex-1">
-                        <table class="w-full text-left border-collapse">
-                            <tbody>
-                                <tr class="border-b border-secondary-100/50 transition-colors hover:bg-secondary-50/50">
-                                    <td class="py-4 px-2 font-bold text-slate-900 text-lg">要介護 1</td>
-                                    <td class="py-4 px-2 text-right whitespace-nowrap"><span class="text-3xl font-bold text-secondary-800">658</span><span class="text-base text-secondary-800/60 ml-1">円</span></td>
-                                </tr>
-                                <tr class="border-b border-secondary-100/50 transition-colors hover:bg-secondary-50/50">
-                                    <td class="py-4 px-2 font-bold text-slate-900 text-lg">要介護 2</td>
-                                    <td class="py-4 px-2 text-right whitespace-nowrap"><span class="text-3xl font-bold text-secondary-800">777</span><span class="text-base text-secondary-800/60 ml-1">円</span></td>
-                                </tr>
-                                <tr class="border-b border-secondary-100/50 transition-colors hover:bg-secondary-50/50">
-                                    <td class="py-4 px-2 font-bold text-slate-900 text-lg">要介護 3</td>
-                                    <td class="py-4 px-2 text-right whitespace-nowrap"><span class="text-3xl font-bold text-secondary-800">900</span><span class="text-base text-secondary-800/60 ml-1">円</span></td>
-                                </tr>
-                                <tr class="border-b border-secondary-100/50 transition-colors hover:bg-secondary-50/50">
-                                    <td class="py-4 px-2 font-bold text-slate-900 text-lg">要介護 4</td>
-                                    <td class="py-4 px-2 text-right whitespace-nowrap"><span class="text-3xl font-bold text-secondary-800">1,023</span><span class="text-base text-secondary-800/60 ml-1">円</span></td>
-                                </tr>
-                                <tr class="transition-colors hover:bg-secondary-50/50">
-                                    <td class="py-4 px-2 font-bold text-slate-900 text-lg">要介護 5</td>
-                                    <td class="py-4 px-2 text-right whitespace-nowrap"><span class="text-3xl font-bold text-secondary-800">1,148</span><span class="text-base text-secondary-800/60 ml-1">円</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    
+                    <div class="p-6 md:p-8 flex flex-col gap-10">
+                        <!-- 1日プラン -->
+                        <div>
+                            <h4 class="font-bold text-secondary-800 mb-4 border-l-4 border-secondary-500 pl-3 text-lg">【1日】 <span class="text-base font-normal ml-2">9:15〜16:30（7時間以上8時間未満）</span></h4>
+                            <ul class="flex flex-col gap-1">
+                                <li class="flex items-end py-2.5 px-2 transition-colors hover:bg-secondary-50/80 rounded-lg group">
+                                    <span class="font-bold text-slate-900 text-lg shrink-0 mb-0.5">要介護 1</span>
+                                    <div class="flex-grow border-b-2 border-dotted border-secondary-300 mx-4 mb-2.5 opacity-60 group-hover:opacity-100 transition-opacity"></div>
+                                    <span class="text-right whitespace-nowrap shrink-0">
+                                        <span class="text-3xl font-bold text-secondary-800">658</span><span class="text-base text-secondary-800/60 ml-1">円</span>
+                                    </span>
+                                </li>
+                                <li class="flex items-end py-2.5 px-2 transition-colors hover:bg-secondary-50/80 rounded-lg group">
+                                    <span class="font-bold text-slate-900 text-lg shrink-0 mb-0.5">要介護 2</span>
+                                    <div class="flex-grow border-b-2 border-dotted border-secondary-300 mx-4 mb-2.5 opacity-60 group-hover:opacity-100 transition-opacity"></div>
+                                    <span class="text-right whitespace-nowrap shrink-0">
+                                        <span class="text-3xl font-bold text-secondary-800">777</span><span class="text-base text-secondary-800/60 ml-1">円</span>
+                                    </span>
+                                </li>
+                                <li class="flex items-end py-2.5 px-2 transition-colors hover:bg-secondary-50/80 rounded-lg group">
+                                    <span class="font-bold text-slate-900 text-lg shrink-0 mb-0.5">要介護 3</span>
+                                    <div class="flex-grow border-b-2 border-dotted border-secondary-300 mx-4 mb-2.5 opacity-60 group-hover:opacity-100 transition-opacity"></div>
+                                    <span class="text-right whitespace-nowrap shrink-0">
+                                        <span class="text-3xl font-bold text-secondary-800">900</span><span class="text-base text-secondary-800/60 ml-1">円</span>
+                                    </span>
+                                </li>
+                                <li class="flex items-end py-2.5 px-2 transition-colors hover:bg-secondary-50/80 rounded-lg group">
+                                    <span class="font-bold text-slate-900 text-lg shrink-0 mb-0.5">要介護 4</span>
+                                    <div class="flex-grow border-b-2 border-dotted border-secondary-300 mx-4 mb-2.5 opacity-60 group-hover:opacity-100 transition-opacity"></div>
+                                    <span class="text-right whitespace-nowrap shrink-0">
+                                        <span class="text-3xl font-bold text-secondary-800">1,023</span><span class="text-base text-secondary-800/60 ml-1">円</span>
+                                    </span>
+                                </li>
+                                <li class="flex items-end py-2.5 px-2 transition-colors hover:bg-secondary-50/80 rounded-lg group">
+                                    <span class="font-bold text-slate-900 text-lg shrink-0 mb-0.5">要介護 5</span>
+                                    <div class="flex-grow border-b-2 border-dotted border-secondary-300 mx-4 mb-2.5 opacity-60 group-hover:opacity-100 transition-opacity"></div>
+                                    <span class="text-right whitespace-nowrap shrink-0">
+                                        <span class="text-3xl font-bold text-secondary-800">1,148</span><span class="text-base text-secondary-800/60 ml-1">円</span>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <!-- 半日プラン -->
+                        <div>
+                            <h4 class="font-bold text-secondary-800 mb-4 border-l-4 border-secondary-500 pl-3 text-lg">【半日】 <span class="text-base font-normal ml-2">9:15〜13:30（4時間以上5時間未満）</span></h4>
+                            <ul class="flex flex-col gap-1">
+                                <li class="flex items-end py-2.5 px-2 transition-colors hover:bg-secondary-50/80 rounded-lg group">
+                                    <span class="font-bold text-slate-900 text-lg shrink-0 mb-0.5">要介護 1</span>
+                                    <div class="flex-grow border-b-2 border-dotted border-secondary-300 mx-4 mb-2.5 opacity-60 group-hover:opacity-100 transition-opacity"></div>
+                                    <span class="text-right whitespace-nowrap shrink-0">
+                                        <span class="text-3xl font-bold text-secondary-800">388</span><span class="text-base text-secondary-800/60 ml-1">円</span>
+                                    </span>
+                                </li>
+                                <li class="flex items-end py-2.5 px-2 transition-colors hover:bg-secondary-50/80 rounded-lg group">
+                                    <span class="font-bold text-slate-900 text-lg shrink-0 mb-0.5">要介護 2</span>
+                                    <div class="flex-grow border-b-2 border-dotted border-secondary-300 mx-4 mb-2.5 opacity-60 group-hover:opacity-100 transition-opacity"></div>
+                                    <span class="text-right whitespace-nowrap shrink-0">
+                                        <span class="text-3xl font-bold text-secondary-800">444</span><span class="text-base text-secondary-800/60 ml-1">円</span>
+                                    </span>
+                                </li>
+                                <li class="flex items-end py-2.5 px-2 transition-colors hover:bg-secondary-50/80 rounded-lg group">
+                                    <span class="font-bold text-slate-900 text-lg shrink-0 mb-0.5">要介護 3</span>
+                                    <div class="flex-grow border-b-2 border-dotted border-secondary-300 mx-4 mb-2.5 opacity-60 group-hover:opacity-100 transition-opacity"></div>
+                                    <span class="text-right whitespace-nowrap shrink-0">
+                                        <span class="text-3xl font-bold text-secondary-800">502</span><span class="text-base text-secondary-800/60 ml-1">円</span>
+                                    </span>
+                                </li>
+                                <li class="flex items-end py-2.5 px-2 transition-colors hover:bg-secondary-50/80 rounded-lg group">
+                                    <span class="font-bold text-slate-900 text-lg shrink-0 mb-0.5">要介護 4</span>
+                                    <div class="flex-grow border-b-2 border-dotted border-secondary-300 mx-4 mb-2.5 opacity-60 group-hover:opacity-100 transition-opacity"></div>
+                                    <span class="text-right whitespace-nowrap shrink-0">
+                                        <span class="text-3xl font-bold text-secondary-800">560</span><span class="text-base text-secondary-800/60 ml-1">円</span>
+                                    </span>
+                                </li>
+                                <li class="flex items-end py-2.5 px-2 transition-colors hover:bg-secondary-50/80 rounded-lg group">
+                                    <span class="font-bold text-slate-900 text-lg shrink-0 mb-0.5">要介護 5</span>
+                                    <div class="flex-grow border-b-2 border-dotted border-secondary-300 mx-4 mb-2.5 opacity-60 group-hover:opacity-100 transition-opacity"></div>
+                                    <span class="text-right whitespace-nowrap shrink-0">
+                                        <span class="text-3xl font-bold text-secondary-800">617</span><span class="text-base text-secondary-800/60 ml-1">円</span>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- ご留意事項 (シミュレーションの上に入れ替え) -->
+            <!-- 算定加算一覧 -->
+            <div class="bg-white p-6 md:p-8 rounded-[2rem] shadow-sm border border-primary-100/80 mb-8 fade-up">
+                <h3 class="font-bold text-slate-900 text-lg mb-5 flex items-center gap-2">
+                    <i data-lucide="plus-circle" class="w-5 h-5 text-primary-500"></i> 当事業所が算定している加算
+                </h3>
+                <div class="grid md:grid-cols-2 gap-x-10 gap-y-1 text-sm md:text-base text-slate-600 font-medium">
+                    <div class="flex justify-between border-b border-slate-100 py-3">
+                        <span>入浴介助加算</span>
+                        <span class="text-slate-900 font-bold">40単位／日</span>
+                    </div>
+                    <div class="flex justify-between border-b border-slate-100 py-3">
+                        <span>個別機能訓練加算Ⅰ(ロ)</span>
+                        <span class="text-slate-900 font-bold">76単位／日</span>
+                    </div>
+                    <div class="flex justify-between border-b border-slate-100 py-3">
+                        <span>ADL維持等加算Ⅰ</span>
+                        <span class="text-slate-900 font-bold">30単位／月</span>
+                    </div>
+                    <div class="flex justify-between border-b border-slate-100 py-3">
+                        <span>科学的介護推進体制加算<span class="text-xs ml-1">(LIFE加算)</span></span>
+                        <span class="text-slate-900 font-bold">40単位／月</span>
+                    </div>
+                    <div class="flex justify-between border-b border-slate-100 py-3">
+                        <span>サービス提供体制強化加算（Ⅰ）</span>
+                        <span class="text-slate-900 font-bold">22単位／回</span>
+                    </div>
+                    <div class="flex justify-between border-b border-slate-100 py-3 md:col-span-2">
+                        <span>介護職員等処遇改善加算（Ⅰ）</span>
+                        <span class="text-slate-900 font-bold">所定単位数✕92/1000単位</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ご留意事項 -->
             <div class="bg-transparent border border-primary-200/60 p-6 md:p-8 rounded-2xl text-base text-slate-600 space-y-4 fade-up mb-10">
                 <p class="font-bold text-slate-900 text-lg flex items-center gap-2"><i data-lucide="info" class="w-5 h-5 text-primary-500"></i> ご留意事項</p>
                 <ul class="list-disc pl-6 space-y-3 marker:text-primary-400">
                     <li>要支援の料金は、1割負担の場合の月額定額料金です（お持ちの介護保険負担割合証により、2割・3割となる場合があります）。</li>
                     <li>要介護の料金は、1割負担の場合の１回分の料金です（お持ちの介護保険負担割合証により、2割・3割となる場合があります）。</li>
-                    <li>入浴介助加算や個別機能訓練加算などの各種加算を取得しているため、最終的なご請求金額は上記目安とは異なります。詳細はお問い合わせください。</li>
+                    <li>入浴介助加算や個別機能訓練加算などの各種加算を取得しているため、最終的なご請求金額の詳細については、お問い合わせください。</li>
                     <li class="font-bold text-slate-800 bg-primary-100/50 inline-block px-4 py-2 rounded-md mt-2">実費負担額： 昼食代 550円 ／ おやつ代 50円 が別途かかります。</li>
                 </ul>
             </div>
 
-            <!-- シミュレーション (ご留意事項の下に入れ替え) -->
+            <!-- シミュレーション -->
             <div class="bg-slate-800 text-white p-6 md:p-10 rounded-[2rem] shadow-soft-3d flex flex-col md:flex-row items-center justify-between gap-6 fade-up relative overflow-hidden">
                 <!-- 装飾 -->
                 <div class="absolute top-0 right-0 w-32 h-32 bg-primary-500/10 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2"></div>
@@ -506,9 +600,12 @@
                     <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm shrink-0">
                         <i data-lucide="calculator" class="w-6 h-6 text-primary-200"></i>
                     </div>
-                    <span class="tracking-wide flex flex-col lg:block mt-1 sm:mt-0 text-lg md:text-xl font-serif">
+                    <span class="tracking-wide flex flex-col mt-1 sm:mt-0 text-lg md:text-xl font-serif">
                         要介護１　１回の利用料の目安
-                        <span class="text-sm font-sans font-normal text-primary-200 lg:ml-3 mt-1 lg:mt-0 block lg:inline-block">※入浴・リハビリ加算等を含む</span>
+                        <span class="text-sm font-sans font-normal text-primary-200 mt-2 block leading-relaxed">
+                            ※9:15〜16:30（7時間以上8時間未満）で利用した場合<br>
+                            ※入浴・個別機能訓練加算等を含む
+                        </span>
                     </span>
                 </div>
                 <div class="text-slate-300 font-medium text-left sm:text-center md:text-right text-base md:text-lg relative z-10 shrink-0">
