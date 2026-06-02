@@ -148,7 +148,6 @@
 
     <!-- Header (上部固定メニュー) -->
     <header class="bg-white/90 backdrop-blur-md border-b border-primary-100 sticky top-0 z-40 transition-all duration-300">
-        <!-- 上部ユーティリティバー（PC表示用 文字サイズ変更） -->
         <div class="bg-slate-50 border-b border-slate-100 hidden sm:block">
             <div class="max-w-5xl mx-auto px-4 py-1 flex justify-end items-center">
                 <div class="flex items-center gap-1 text-[11px] text-slate-600 bg-slate-200/50 rounded-md p-0.5">
@@ -166,7 +165,6 @@
                     <h1 class="text-xl md:text-2xl font-serif font-bold text-primary-800 tracking-wider group-hover:text-primary-500 transition-colors">元気デイきらら</h1>
                 </a>
                 
-                <!-- スマホ向けUI（文字サイズ変更） -->
                 <div class="flex items-center gap-2 md:hidden">
                     <div class="flex items-center bg-slate-100 p-0.5 rounded-md border border-slate-200">
                         <span class="text-[9px] font-bold text-slate-500 px-1 hidden min-[360px]:inline">文字</span>
@@ -176,9 +174,7 @@
                 </div>
             </div>
             
-            <!-- ナビゲーションメニュー -->
             <nav class="w-full md:w-auto mt-2 md:mt-0">
-                <!-- PC用ナビゲーション -->
                 <ul class="hidden md:flex items-center gap-5 md:gap-8 text-base font-medium text-slate-600 whitespace-nowrap">
                     <li><a href="#strengths" class="smooth-scroll hover:text-primary-600 transition-colors py-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary-500 after:transition-all hover:after:w-full cursor-pointer">３つの特徴</a></li>
                     <li><a href="#plans" class="smooth-scroll hover:text-primary-600 transition-colors py-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary-500 after:transition-all hover:after:w-full cursor-pointer">プラン</a></li>
@@ -188,7 +184,6 @@
                     <li><a href="#info" class="smooth-scroll hover:text-primary-600 transition-colors py-2 relative after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-0 after:h-0.5 after:bg-primary-500 after:transition-all hover:after:w-full cursor-pointer">施設情報</a></li>
                 </ul>
 
-                <!-- スマホ用ナビゲーション（コンバージョンに直結する項目のみに絞り、折り返し表示） -->
                 <ul class="flex md:hidden flex-wrap justify-between gap-y-2 text-[13px] font-bold text-slate-600 px-1 pt-3 pb-1 border-t border-slate-100">
                     <li><a href="#strengths" class="smooth-scroll hover:text-primary-600 transition-colors bg-slate-50 px-3 py-1.5 rounded-full border border-slate-200">特徴</a></li>
                     <li><a href="#plans" class="smooth-scroll hover:text-primary-600 transition-colors bg-slate-50 px-3 py-1.5 rounded-full border border-slate-200">プラン</a></li>
@@ -205,7 +200,6 @@
         </div>
     </header>
 
-    <!-- 常時表示CTA (Floating Action Button) -->
     <div class="fixed bottom-6 right-6 z-50 fab-enter pointer-events-none">
         <a href="tel:097-578-7320" class="pointer-events-auto flex items-center justify-center gap-3 bg-gradient-to-r from-primary-500 to-secondary-500 text-white w-14 h-14 md:w-auto md:px-6 md:py-2.5 md:h-auto rounded-full shadow-[0_10px_25px_-5px_rgba(0,175,204,0.4)] hover:shadow-[0_15px_30px_-5px_rgba(0,175,204,0.6)] hover:-translate-y-1 transition-all duration-300 btn-shine group border border-white/20">
             <i data-lucide="phone" class="w-6 h-6 md:w-6 md:h-6 fill-white/20"></i>
@@ -218,25 +212,34 @@
 
     <!-- Hero Section -->
     <section id="hero" class="relative bg-gradient-animate overflow-hidden">
-        <!-- 背景の装飾的な3D要素 (ぼかし円) -->
         <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[50%] rounded-full bg-primary-200/40 blur-3xl"></div>
         <div class="absolute bottom-[-10%] right-[-5%] w-[30%] h-[40%] rounded-full bg-secondary-200/40 blur-3xl"></div>
 
-        <div class="max-w-4xl mx-auto px-4 py-20 md:py-36 text-center space-y-10 relative z-10 fade-up">
-            <h2 class="text-3xl md:text-5xl lg:text-6xl font-serif font-bold text-slate-900 leading-[1.5] md:leading-[1.4] tracking-wider">
-                趣味と会話で彩る、<br />
-                <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-secondary-600 text-4xl md:text-6xl lg:text-7xl block mt-6 relative inline-block">
-                    大人たちの社交場。
-                    <span class="absolute -bottom-2 left-0 w-full h-1 bg-secondary-200 rounded-full opacity-60"></span>
-                </span>
-            </h2>
-            <p class="text-xl md:text-2xl text-slate-600 font-medium tracking-widest leading-relaxed">
-                男性も女性も自分らしく。<br class="md:hidden" />笑顔になれるアットホームな空間。
-            </p>
-            <div class="pt-8 flex justify-center fade-up delay-200 hidden md:flex">
-                <a href="#contact" class="smooth-scroll inline-flex items-center justify-center px-12 py-5 text-lg font-medium text-white bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full shadow-soft-3d shadow-inner-light transition-all hover:shadow-soft-3d-hover hover:-translate-y-0.5 gap-3 cursor-pointer btn-shine">
-                    施設へのお問い合わせ <i data-lucide="arrow-right" class="w-5 h-5"></i>
-                </a>
+        <div class="max-w-6xl mx-auto px-4 py-16 md:py-28 relative z-10 flex flex-col lg:flex-row items-center gap-12">
+            <!-- テキストエリア -->
+            <div class="lg:w-1/2 text-center lg:text-left space-y-10 fade-up">
+                <h2 class="text-3xl md:text-5xl lg:text-5xl xl:text-6xl font-serif font-bold text-slate-900 leading-[1.5] md:leading-[1.4] tracking-wider">
+                    趣味と会話で彩る、<br />
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary-600 to-secondary-600 text-4xl md:text-5xl lg:text-6xl block mt-6 relative inline-block">
+                        大人たちの社交場。
+                        <span class="absolute -bottom-2 left-0 w-full h-1 bg-secondary-200 rounded-full opacity-60"></span>
+                    </span>
+                </h2>
+                <p class="text-xl md:text-2xl text-slate-600 font-medium tracking-widest leading-relaxed">
+                    男性も女性も自分らしく。<br class="md:hidden" />笑顔になれるアットホームな空間。
+                </p>
+                <div class="pt-4 flex justify-center lg:justify-start fade-up delay-200 hidden md:flex">
+                    <a href="#contact" class="smooth-scroll inline-flex items-center justify-center px-10 py-4 text-lg font-medium text-white bg-gradient-to-r from-primary-500 to-secondary-500 rounded-full shadow-soft-3d shadow-inner-light transition-all hover:shadow-soft-3d-hover hover:-translate-y-0.5 gap-3 cursor-pointer btn-shine">
+                        施設へのお問い合わせ <i data-lucide="arrow-right" class="w-5 h-5"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- メイン画像プレースホルダー -->
+            <div class="lg:w-1/2 w-full fade-up delay-300">
+                <div class="relative w-full aspect-[4/3] md:aspect-[16/10] rounded-[2.5rem] overflow-hidden shadow-2xl border-[6px] border-white/80 bg-slate-100 flex items-center justify-center transform lg:rotate-2 hover:rotate-0 transition-transform duration-500">
+                    <img src="最初の.jpeg" alt="笑顔で談笑する高齢者とスタッフ" class="w-full h-full object-cover">
+                </div>
             </div>
         </div>
     </section>
@@ -253,7 +256,7 @@
 
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Feature 1 -->
-                <div class="glass-card bg-primary-50/30 p-8 rounded-3xl relative fade-up border-primary-100/50">
+                <div class="glass-card bg-primary-50/30 p-8 rounded-3xl relative fade-up border-primary-100/50 flex flex-col h-full">
                     <div class="w-16 h-16 bg-gradient-to-br from-primary-100 to-white rounded-2xl shadow-sm flex items-center justify-center text-primary-600 mb-6 border border-white">
                         <i data-lucide="activity" class="w-7 h-7"></i>
                     </div>
@@ -261,13 +264,17 @@
                     <h3 class="text-xl md:text-2xl font-bold mb-4 tracking-wide text-slate-900">
                         PT・OT常駐による<br/>本格リハビリ体制
                     </h3>
-                    <p class="text-slate-600 leading-relaxed text-base font-medium">
+                    <p class="text-slate-600 leading-relaxed text-base font-medium mb-6 flex-grow">
                         理学療法士と作業療法士の2名体制で常駐。お一人おひとりの身体機能に合わせた個別リハビリを提供します。
                     </p>
+                    <!-- 特徴1 画像プレースホルダー -->
+                    <div class="w-full aspect-video bg-slate-100/80 rounded-xl flex items-center justify-center border border-slate-200 mt-auto overflow-hidden">
+                        <img src="訓練1.png" alt="理学療法士によるリハビリ風景" class="w-full h-full object-cover">
+                    </div>
                 </div>
 
                 <!-- Feature 2 -->
-                <div class="glass-card bg-gradient-to-br from-primary-50/20 to-secondary-50/20 p-8 rounded-3xl relative fade-up delay-100 border-primary-100/30">
+                <div class="glass-card bg-gradient-to-br from-primary-50/20 to-secondary-50/20 p-8 rounded-3xl relative fade-up delay-100 border-primary-100/30 flex flex-col h-full">
                     <div class="w-16 h-16 bg-gradient-to-br from-primary-50 to-secondary-50 rounded-2xl shadow-sm flex items-center justify-center text-primary-500 mb-6 border border-white">
                         <i data-lucide="users" class="w-7 h-7"></i>
                     </div>
@@ -275,13 +282,17 @@
                     <h3 class="text-xl md:text-2xl font-bold mb-4 tracking-wide text-slate-900">
                         登録の４割が男性！<br/>「ハマる」デイサービス
                     </h3>
-                    <p class="text-slate-600 leading-relaxed text-base font-medium">
+                    <p class="text-slate-600 leading-relaxed text-base font-medium mb-6 flex-grow">
                         全国平均（約2割）を大きく上回る、登録者の約4割が男性のご利用者様です。囲碁・将棋・麻雀といった個別活動や、目標を持てる本格リハビリなど、男性が心から楽しめる居場所をご提供します。
                     </p>
+                    <!-- 特徴2 画像プレースホルダー -->
+                    <div class="w-full aspect-video bg-slate-100/80 rounded-xl flex items-center justify-center border border-slate-200 mt-auto overflow-hidden">
+                        <img src="男性.jpeg" alt="男性同士で将棋や囲碁を楽しむ様子" class="w-full h-full object-cover">
+                    </div>
                 </div>
 
                 <!-- Feature 3 -->
-                <div class="glass-card bg-secondary-50/30 p-8 rounded-3xl relative fade-up delay-200 border-secondary-100/50">
+                <div class="glass-card bg-secondary-50/30 p-8 rounded-3xl relative fade-up delay-200 border-secondary-100/50 flex flex-col h-full">
                     <div class="w-16 h-16 bg-gradient-to-br from-secondary-100 to-white rounded-2xl shadow-sm flex items-center justify-center text-secondary-600 mb-6 border border-white">
                         <i data-lucide="clock" class="w-7 h-7"></i>
                     </div>
@@ -289,9 +300,13 @@
                     <h3 class="text-xl md:text-2xl font-bold mb-4 tracking-wide text-slate-900">
                         体力に合わせて選べる<br/>1日と半日プラン
                     </h3>
-                    <p class="text-slate-600 leading-relaxed text-base font-medium">
+                    <p class="text-slate-600 leading-relaxed text-base font-medium mb-6 flex-grow">
                         ご自身のペースでゆったり過ごせる基本の1日利用に加え、必要なケアを凝縮した半日利用をオプションとしてご用意しています。
                     </p>
+                    <!-- 特徴3 画像プレースホルダー -->
+                    <div class="w-full aspect-video bg-slate-100/80 rounded-xl flex items-center justify-center border border-slate-200 mt-auto overflow-hidden">
+                        <img src="１日と半日１.JPG" alt="プランに合わせてリラックスして過ごす様子" class="w-full h-full object-cover">
+                    </div>
                 </div>
             </div>
         </div>
@@ -310,7 +325,7 @@
 
             <div class="grid md:grid-cols-2 gap-8">
                 <!-- 基本プラン -->
-                <div class="bg-white rounded-[2rem] p-8 shadow-soft-3d border border-primary-100/50 relative overflow-hidden group hover:shadow-soft-3d-hover transition-all duration-500 fade-up">
+                <div class="bg-white rounded-[2rem] p-8 shadow-soft-3d border border-primary-100/50 relative overflow-hidden group hover:shadow-soft-3d-hover transition-all duration-500 fade-up flex flex-col h-full">
                     <div class="absolute top-0 left-0 w-full h-1.5 bg-primary-500 transform origin-left scale-x-100 transition-transform duration-500"></div>
                     
                     <div class="flex justify-between items-start mb-6">
@@ -323,13 +338,18 @@
                         </div>
                     </div>
                     
-                    <p class="text-slate-600 text-lg leading-relaxed font-medium">
+                    <p class="text-slate-600 text-lg leading-relaxed font-medium mb-8 flex-grow">
                         リハビリ、入浴、お食事、他者との交流を通じた心身の活性化を、1日かけてご自身のペースでゆったりと行います。
                     </p>
+
+                    <!-- 1日プラン 画像プレースホルダー -->
+                    <div class="w-full h-48 bg-slate-50/50 rounded-xl flex items-center justify-center border border-slate-100 mt-auto overflow-hidden relative">
+                        <img src="１日.PNG" alt="お食事や入浴などゆったり過ごす1日のイメージ" class="w-full h-full object-cover">
+                    </div>
                 </div>
 
                 <!-- オプションプラン -->
-                <div class="bg-gradient-to-br from-secondary-50 to-white rounded-[2rem] p-8 shadow-soft-3d border border-secondary-200/50 relative overflow-hidden group hover:shadow-soft-3d-hover transition-all duration-500 fade-up delay-100">
+                <div class="bg-gradient-to-br from-secondary-50 to-white rounded-[2rem] p-8 shadow-soft-3d border border-secondary-200/50 relative overflow-hidden group hover:shadow-soft-3d-hover transition-all duration-500 fade-up delay-100 flex flex-col h-full">
                     <div class="absolute top-0 left-0 w-full h-1.5 bg-secondary-500 transform origin-left scale-x-100 transition-transform duration-500"></div>
                     
                     <div class="flex justify-between items-start mb-6">
@@ -342,13 +362,18 @@
                         </div>
                     </div>
                     
-                    <p class="text-slate-600 text-lg leading-relaxed font-medium mb-4">
+                    <p class="text-slate-600 text-lg leading-relaxed font-medium mb-6 flex-grow">
                         お昼すぎまでの短い時間の中で、三大ケアが完結します。長時間の利用に体力的な不安がある方に最適です。
                     </p>
-                    <div class="flex gap-2 flex-wrap">
+                    <div class="flex gap-2 flex-wrap mb-8">
                         <span class="text-sm font-bold text-secondary-600 bg-white border border-secondary-200 px-3 py-1.5 rounded-lg shadow-sm">入浴</span>
                         <span class="text-sm font-bold text-secondary-600 bg-white border border-secondary-200 px-3 py-1.5 rounded-lg shadow-sm">専門リハビリ</span>
                         <span class="text-sm font-bold text-secondary-600 bg-white border border-secondary-200 px-3 py-1.5 rounded-lg shadow-sm">昼食</span>
+                    </div>
+
+                    <!-- 半日プラン 画像プレースホルダー -->
+                    <div class="w-full h-48 bg-white/60 rounded-xl flex items-center justify-center border border-secondary-100 mt-auto overflow-hidden relative">
+                        <img src="半日.png" alt="短時間で効率よくケアを受けるイメージ" class="w-full h-full object-cover">
                     </div>
                 </div>
             </div>
@@ -382,21 +407,26 @@
                 </h2>
             </div>
             
-            <div class="bg-gradient-to-br from-primary-50 to-secondary-50 rounded-[2rem] p-8 md:p-12 shadow-soft-3d border border-primary-100/50 flex flex-col md:flex-row items-center gap-10 fade-up">
-                <div class="md:w-1/2 space-y-6">
-                    <div class="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full text-primary-600 font-bold text-sm shadow-sm border border-primary-100">
+            <div class="bg-gradient-to-br from-primary-50 to-secondary-50 rounded-[2rem] p-8 md:p-12 shadow-soft-3d border border-primary-100/50 flex flex-col md:flex-row items-stretch gap-10 fade-up">
+                <div class="md:w-1/2 space-y-6 flex flex-col">
+                    <div class="inline-flex items-center gap-2 bg-white px-4 py-2 rounded-full text-primary-600 font-bold text-sm shadow-sm border border-primary-100 self-start">
                         <i data-lucide="bus" class="w-4 h-4"></i> 2ヶ月に1回の特別イベント
                     </div>
                     <h3 class="text-2xl md:text-3xl font-serif font-bold text-slate-900 leading-relaxed">
                         季節を感じるお出かけで、<br/>心身ともにリフレッシュ
                     </h3>
-                    <p class="text-slate-600 text-lg leading-relaxed font-medium">
+                    <p class="text-slate-600 text-lg leading-relaxed font-medium mb-6">
                         きららでは、2ヶ月に1回、外出レクリエーションを活発に行っています。季節の移ろいを感じるドライブや、お買い物、外食など、非日常の体験を通して、気分転換や社会参加の機会を提供しています。
                     </p>
+                    
+                    <!-- レクリエーション 画像プレースホルダー -->
+                    <div class="w-full flex-grow min-h-[200px] bg-white/50 rounded-xl flex items-center justify-center border border-white shadow-sm overflow-hidden mt-auto">
+                        <img src="佐賀関道の駅.png" alt="お花見や神社参拝など、外出レクで楽しむ様子" class="w-full h-full object-cover">
+                    </div>
                 </div>
                 
-                <div class="md:w-1/2 w-full">
-                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-primary-100/50">
+                <div class="md:w-1/2 w-full flex flex-col h-full">
+                    <div class="bg-white rounded-2xl p-6 shadow-sm border border-primary-100/50 flex-grow">
                         <h4 class="font-bold text-slate-800 mb-4 flex items-center gap-2 border-b border-primary-50 pb-3">
                             <i data-lucide="map" class="w-5 h-5 text-secondary-500"></i> これまでのお出かけ先
                         </h4>
@@ -431,7 +461,6 @@
                     <div class="bg-primary-100/50 text-primary-900 text-center py-5 border-b border-primary-100">
                         <h3 class="font-serif font-bold text-2xl">要支援の方</h3>
                         <p class="text-sm text-primary-800/80 mt-1 font-medium">※月額の自己負担額（1割負担の場合）</p>
-                        <!-- 高さを合わせるための透明なプレースホルダー -->
                         <p class="text-sm mt-0.5 font-medium invisible select-none" aria-hidden="true">※9:15〜16:30（7時間以上8時間未満）</p>
                     </div>
                     <div class="p-6 md:p-8 flex-1">
@@ -460,7 +489,7 @@
                     </div>
                 </div>
 
-                <!-- 要介護 (1日と半日を縦に統合) -->
+                <!-- 要介護 -->
                 <div class="glass-card rounded-[2rem] overflow-hidden flex flex-col fade-up delay-100 bg-white">
                     <div class="bg-secondary-100/50 text-secondary-900 text-center py-5 border-b border-secondary-100">
                         <h3 class="font-serif font-bold text-2xl">要介護の方</h3>
@@ -468,7 +497,6 @@
                     </div>
                     
                     <div class="p-6 md:p-8 flex flex-col gap-10">
-                        <!-- 1日プラン -->
                         <div>
                             <h4 class="font-bold text-secondary-800 mb-4 border-l-4 border-secondary-500 pl-3 text-lg">【1日】 <span class="text-base font-normal ml-2">9:15〜16:30（7時間以上8時間未満）</span></h4>
                             <ul class="flex flex-col gap-1">
@@ -510,7 +538,6 @@
                             </ul>
                         </div>
 
-                        <!-- 半日プラン -->
                         <div>
                             <h4 class="font-bold text-secondary-800 mb-4 border-l-4 border-secondary-500 pl-3 text-lg">【半日】 <span class="text-base font-normal ml-2">9:15〜13:30（4時間以上5時間未満）</span></h4>
                             <ul class="flex flex-col gap-1">
@@ -638,7 +665,7 @@
         </div>
     </section>
 
-    <!-- お客様の声 (アバターアイコン追加版) -->
+    <!-- お客様の声 -->
     <section id="voice" class="py-24 bg-primary-50 relative">
         <div class="max-w-5xl mx-auto px-4">
             <div class="text-center mb-16 fade-up">
@@ -653,7 +680,7 @@
                 <div class="bg-white p-8 rounded-3xl shadow-soft-3d border border-primary-100/50 relative fade-up">
                     <div class="absolute -top-4 -left-4 w-12 h-12 bg-primary-500 text-white rounded-full flex items-center justify-center shadow-lg font-serif text-3xl">“</div>
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 rounded-full bg-rose-50 border border-rose-100 flex items-center justify-center text-rose-500 shrink-0">
+                        <div class="w-10 h-10 rounded-full bg-rose-50 border border-rose-100 flex items-center justify-center text-rose-500 shrink-0 overflow-hidden">
                             <i data-lucide="user" class="w-5 h-5"></i>
                         </div>
                         <span class="text-xs font-bold bg-primary-50 text-primary-600 px-3 py-1.5 rounded-full">ご利用者様 (80代・女性)</span>
@@ -668,7 +695,7 @@
                 <div class="bg-white p-8 rounded-3xl shadow-soft-3d border border-secondary-100/50 relative fade-up delay-100">
                     <div class="absolute -top-4 -left-4 w-12 h-12 bg-secondary-500 text-white rounded-full flex items-center justify-center shadow-lg font-serif text-3xl">“</div>
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="w-10 h-10 rounded-full bg-secondary-50 border border-secondary-100 flex items-center justify-center text-secondary-600 shrink-0">
+                        <div class="w-10 h-10 rounded-full bg-secondary-50 border border-secondary-100 flex items-center justify-center text-secondary-600 shrink-0 overflow-hidden">
                             <i data-lucide="users" class="w-5 h-5"></i>
                         </div>
                         <span class="text-xs font-bold bg-secondary-50 text-secondary-600 px-3 py-1.5 rounded-full">ご家族様</span>
@@ -679,11 +706,11 @@
                     </p>
                 </div>
 
-                <!-- Voice 3 (男性を視覚的に強調) -->
+                <!-- Voice 3 -->
                 <div class="bg-white p-8 rounded-3xl shadow-soft-3d border border-primary-200/60 relative fade-up delay-200">
                     <div class="absolute -top-4 -left-4 w-12 h-12 bg-primary-500 text-white rounded-full flex items-center justify-center shadow-lg font-serif text-3xl">“</div>
                     <div class="flex items-center gap-3 mb-4">
-                        <div class="w-11 h-11 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white shrink-0 shadow-md">
+                        <div class="w-11 h-11 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center text-white shrink-0 shadow-md overflow-hidden">
                             <i data-lucide="user" class="w-6 h-6"></i>
                         </div>
                         <span class="text-xs font-bold bg-primary-50 text-primary-600 px-3 py-1.5 rounded-full">ご利用者様 (70代・男性)</span>
@@ -740,17 +767,25 @@
                     </div>
                 </div>
 
-                <!-- Google Maps -->
-                <div class="rounded-[2rem] overflow-hidden shadow-soft-3d border border-primary-100 relative h-full min-h-[400px] fade-up delay-100 group">
-                    <iframe 
-                        src="https://maps.google.com/maps?q=大分県大分市大字田尻字高尾783-1&t=&z=15&ie=UTF8&iwloc=&output=embed" 
-                        class="absolute top-0 left-0 w-full h-full"
-                        style="border: 0;" 
-                        allowfullscreen="" 
-                        loading="lazy" 
-                        referrerpolicy="no-referrer-when-downgrade"
-                        title="元気デイきらら マップ"
-                    ></iframe>
+                <!-- 画像プレースホルダー & Google Maps -->
+                <div class="flex flex-col gap-6 fade-up delay-100 h-full">
+                    <!-- 施設情報 画像プレースホルダー -->
+                    <div class="w-full h-48 md:h-64 bg-slate-100 rounded-[2rem] flex items-center justify-center border border-slate-200 shadow-sm overflow-hidden relative">
+                        <img src="きららイラストのコピー.png" alt="施設の外観や明るい内観の写真" class="w-full h-full object-cover">
+                    </div>
+
+                    <!-- Map -->
+                    <div class="rounded-[2rem] overflow-hidden shadow-soft-3d border border-primary-100 relative flex-grow min-h-[300px]">
+                        <iframe 
+                            src="https://maps.google.com/maps?q=大分県大分市大字田尻字高尾783-1&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+                            class="absolute top-0 left-0 w-full h-full"
+                            style="border: 0;" 
+                            allowfullscreen="" 
+                            loading="lazy" 
+                            referrerpolicy="no-referrer-when-downgrade"
+                            title="元気デイきらら マップ"
+                        ></iframe>
+                    </div>
                 </div>
             </div>
         </div>
@@ -810,29 +845,23 @@
                 btn.addEventListener('click', (e) => {
                     const selectedSize = e.target.dataset.size;
                     
-                    // 全てのボタンのスタイルを更新
                     fontSizeBtns.forEach(b => {
                         if (b.dataset.size === selectedSize) {
-                            // 選択状態のスタイル
                             b.classList.add('bg-white', 'text-slate-800', 'shadow-sm', 'border-slate-200');
                             b.classList.remove('text-slate-500', 'border-transparent', 'hover:bg-white', 'hover:bg-white/50');
                         } else {
-                            // 非選択状態のスタイル
                             b.classList.remove('bg-white', 'text-slate-800', 'shadow-sm', 'border-slate-200');
                             b.classList.add('text-slate-500', 'border-transparent', 'hover:bg-white');
                         }
                     });
 
-                    // 実際のフォントサイズ変更 (HTMLのルートフォントサイズを変更して全体をスケーリング)
-                    // 注: これは Tailwind CSS の rem 指定と連動して機能します
                     if (selectedSize === 'large') {
-                        rootElement.style.fontSize = '112.5%'; // デフォルト16pxを18px相当に拡大
+                        rootElement.style.fontSize = '112.5%';
                     } else {
-                        rootElement.style.fontSize = '100%';  // デフォルトの16pxに戻す
+                        rootElement.style.fontSize = '100%';
                     }
                 });
             });
-
 
             // 1. スケジュールデータの動的生成
             const scheduleData = [
@@ -964,7 +993,6 @@
                     const icon = button.querySelector('.faq-icon');
                     const isOpen = content.classList.contains('opacity-100');
 
-                    // 他を閉じる
                     document.querySelectorAll('.faq-content').forEach(el => {
                         el.classList.remove('max-h-[1000px]', 'opacity-100');
                         el.classList.add('max-h-0', 'opacity-0');
@@ -973,7 +1001,6 @@
                         el.classList.remove('rotate-180');
                     });
 
-                    // 開閉トグル
                     if (!isOpen) {
                         content.classList.remove('max-h-0', 'opacity-0');
                         content.classList.add('max-h-[1000px]', 'opacity-100');
